@@ -33,5 +33,5 @@ then
   exit 1
 fi
 
-PARAMS="{\"p\": $P, \"n_trials\": $N_TRIALS, \"cutoff\": $CUTOFF, \"file_out\": \"$HYPERGRAPH_FILE-$P-$CUTOFF-$N_TRIALS.json\"}"
+PARAMS="{\"p\": $P, \"n_trials\": $N_TRIALS, \"cutoff\": $CUTOFF, \"file_out\": \"out/$HYPERGRAPH_FILE-$P-$CUTOFF-$N_TRIALS.json\"}"
 echo $PARAMS > tmp/params.json

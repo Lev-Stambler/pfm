@@ -15,7 +15,7 @@ function success_probability = simulate_n_rounds(file_save_block_err, p, n, cuto
  end
  block_error_rate = 1 - numb_successes / n;
  fileID = fopen(file_save_block_err, 'w');
- fwrite(fileID, block_error_rate,'double');
+ fwrite(fileID, string(block_error_rate));
  fclose(fileID);
 end
 
