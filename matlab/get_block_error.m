@@ -14,6 +14,7 @@ function success_probability = simulate_n_rounds(file_save_block_err, p, n, cuto
    numb_successes = numb_successes + simulate_round_filter(p, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection);
  end
  block_error_rate = 1 - numb_successes / n;
+ fprintf("\n Block error rate: %d\n", block_error_rate);
  fileID = fopen(file_save_block_err, 'w');
  fwrite(fileID, string(block_error_rate));
  fclose(fileID);
@@ -70,7 +71,7 @@ function success = simulate_round_filter(p, cutoff, n_qubits, Hx, Hz, n_stabiliz
         
         % Get the power set of generators
         generators_power = power_set(generators, skip_by);
-        size(generators_power)
+        %size(generators_power)
          % Go over every set in the powerset
          for power_set_size_div_skip_by = 1:floor(size(generators, 2) / skip_by)
            power_set_size = power_set_size_div_skip_by * skip_by;
