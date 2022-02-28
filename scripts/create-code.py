@@ -39,7 +39,7 @@ to create a bipartite expander graph
 
 The vertices are now indexed by n^2, where both L, R have n^2 vertices.
 
-with f_{vertex transform} being ((x, y) => x * n + y
+with f_{vertex transform} being ((x, y) => x * n + y. n^n will also be added to the right edges
 """
 def getBipartiteGraphEdges(edges, n):	
 	edgesBipartite = {}
@@ -49,7 +49,7 @@ def getBipartiteGraphEdges(edges, n):
 				for yP in range(n):
 					edge = ((x, y), (xP, yP))
 					if edge in edges:
-						newEdge = (x * n + y, xP * n + y)
+						newEdge = (x * n + y, xP * n + y + n**2)
 						edgesBipartite[newEdge] = 1
 	return edgesBipartite
 
@@ -60,13 +60,28 @@ def getBipartiteGraphRoutine(n):
 
 """
 Note that here n is the number of vertices in any one side of the
-bipartite partition. For simplicity, the sizes are the same
+bipartite partition. For simplicity, the sizes are the same.
+
+First it will take graphs with edges of form a,b \in ([n], [n]) where a \in L and b \in R
+and add n to all indices in b. 
 
 returns two lists of edges for Hz, Hx
 """
 def hypergraph2BipartiteCode(G1Edges, G2Edges, n):
 	
-	pass
+
+	Hz = {}
+	Hx = {}
+
+	# build Hz by having 100 <= b < 200, 0 <= \alpha < 100
+	for b in range(100, 200):
+		for alpha in range(0, 100):
+			stabilizer_vertex = (b, alpha)
+			for a in range(0, 100):
+				# CHECK FOR VERTEX
+				pass
+			for beta in range(100, 200):
+				pass
 
 """
 Create both parity check matrices (X, Z) from
@@ -85,5 +100,6 @@ def main():
 	n = 10
 	G1 = getBipartiteGraphRoutine(n)
 	G2 = getBipartiteGraphRoutine(n)
+	print(G1)
 
 main()
