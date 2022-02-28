@@ -124,6 +124,6 @@ def save_H(H_X, H_Z, N_QUBITS, N_STABLE, outfile, is_matlab=True):
 	
 # TODO: test for expander property??
 for i in range(10, 15):
-	regularity=(5, 6)
+	regularity=(2, 3)
 	(H_X, H_Z, N_QUBITS, N_STABLE) = gen_hx_hz(k=i, regularity=regularity)
 	save_H(H_X, H_Z, N_QUBITS, N_STABLE, f"../matlab/g-{i * regularity[1]}-{i * regularity[0]}.json")
