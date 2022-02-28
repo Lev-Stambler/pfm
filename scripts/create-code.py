@@ -1,105 +1,129 @@
-from venv import create
-from networkx.generators import margulis_gabber_galil_graph
+"""
+While we should ensure expander properties,
+for now just take a 2 rigular bipartite graph, b/c, w.h.p.,
+its an expander:
+Ref: https://theory.epfl.ch/courses/topicstcs/Lecture3.pdf
+"""
+
+import networkx as nx
+import numpy as np
+import random
 import math
-
-from sympy import Ge
-
-"""
-Create an expander graph: note it is not a bipartite graph
-
-The graph creation follows from https://networkx.org/documentation/networkx-1.10/reference/generated/networkx.generators.expanders.margulis_gabber_galil_graph.html
-The graph has degree 8 and a second largest eigen value of 5 sqrt(2)
-
-"""
-def createExpanderGraph(n):
-	G = margulis_gabber_galil_graph(int(n))
-	return G
+import torch
+import hypernetx as hnx
+import itertools
+import sys
+import json
+from scipy import sparse
 
 
-"""
-Take in an expander graph and get the set of edges
-"""
-def getExpanderEdges(G):
-	edges = {}
-	for i in G._adj.items():
-		v1 = i[0]
-		for edge in i[1].items():
-			# if list(edge[1].keys())[1] != 0:
-			# 	print(edge)
-			v2 = edge[0]
-			edges[(v1, v2)] = 1
-	return edges
+def createTannerGraph(regularity: tuple[int, int], n: int, m: int):
+  (r, c) = regularity
+  print("Creating bipartite graph with shape:", n, m)
+  B = nx.bipartite.gnmk_random_graph(n, m, c * n)
+  return B
 
-"""
-Takes in edges of the form (v1, v2), where v1, v2 = (x, y), x, y \in [n]
+# REGULARITY = (5,6) # defines a (r,c) biregular bipartite graph
+def gen_hx_hz(k=5, regularity=(5, 6)):
+	n = regularity[1] * k
+	m = regularity[0] * k
 
-And returns a set of edges for G' = (L U R, E) following
-https://cstheory.stackexchange.com/questions/31751/d-regular-bipartite-expander-graph,
-to create a bipartite expander graph
+	(g1, g2) = (createTannerGraph(regularity, n, m), createTannerGraph(regularity, n, m))
+	hyperGraph = nx.cartesian_product(g1, g2)
 
-The vertices are now indexed by n^2, where both L, R have n^2 vertices.
+	## Get all (i, j) (i, j') edges for H_x
+	## This can be done by  iterating over the edges
+	## of g1 (resp g2) and populating the matrix.
+	## Then for each edge, check if (i, j) in g1 for edge (i, i), (i, j) where j in 0...m - 1
+	numb_stabilizers = m * n
+	numb_qubits = m * m + n * n
+		
+	def gen_H_X():
+		H_x = torch.zeros(numb_stabilizers, numb_qubits, dtype=torch.int8)
+		# for stabilizer_idx in range(m * n):
+		# 	# 0 <= a < n
+		# 	a = stabilizer_idx % n
+		# 	# n <= beta < n + m
+		# 	beta = int(stabilizer_idx / n) + n
+		# 	stabilizerVertex = (a, beta)
 
-with f_{vertex transform} being ((x, y) => x * n + y. n^n will also be added to the right edges
-"""
-def getBipartiteGraphEdges(edges, n):	
-	edgesBipartite = {}
-	for x in range(n):
-		for y in range(n):
-			for xP in range(n):
-				for yP in range(n):
-					edge = ((x, y), (xP, yP))
-					if edge in edges:
-						newEdge = (x * n + y, xP * n + y + n**2)
-						edgesBipartite[newEdge] = 1
-	return edgesBipartite
+		for x in range(m * m):
+			dataVertex = (int(x / m) + n, x % m + n)
+			for y in range(n):
+				stabilizerVertex = (y, dataVertex[1])
+				if hyperGraph.has_edge(dataVertex, stabilizerVertex):
+					H_x[m * y + (dataVertex[1] - n)][n * n + x] = 1
+		
+		for x in range(n * n):
+			dataVertex = (int(x / n), x % n)
+			for y in range(m):
+				stabilizerVertex = (dataVertex[0], y + n) ## hmm not sure
+				if hyperGraph.has_edge(dataVertex, stabilizerVertex):
+					H_x[m * dataVertex[0] + y][x] = 1
 
-def getBipartiteGraphRoutine(n):
-	GExpander = createExpanderGraph(10)
-	expEdges = getExpanderEdges(GExpander)
-	return getBipartiteGraphEdges(expEdges, n)
+		maxDeg = 0
+		for i in range(0, m *m):
+			maxDeg = max(maxDeg, torch.count_nonzero(H_x[i]))
+		print(maxDeg)
 
-"""
-Note that here n is the number of vertices in any one side of the
-bipartite partition. For simplicity, the sizes are the same.
+		return H_x
+		
+	def gen_H_Z():
+		H = torch.zeros(numb_stabilizers, numb_qubits, dtype=torch.int8)
+		for x in range(m * m):
+			dataVertex = (int(x / m) + n, x % m + n)
+			for y in range(n):
+				stabilizerVertex = (dataVertex[0], y)
+				if hyperGraph.has_edge(dataVertex, stabilizerVertex):
+					H[m * y + (dataVertex[0] - n)][n * n + x] = 1
+		
+		for x in range(n * n):
+			dataVertex = (int(x / n), x % n)
+			for y in range(m):
+				stabilizerVertex = (y + n, dataVertex[1])
+				if hyperGraph.has_edge(dataVertex, stabilizerVertex):
+					H[m * dataVertex[1] + y][x] = 1
 
-First it will take graphs with edges of form a,b \in ([n], [n]) where a \in L and b \in R
-and add n to all indices in b. 
+		maxDeg = 0
+		for i in range(0, m * m):
+			maxDeg = max(maxDeg, torch.count_nonzero(H[i]))
+		print(maxDeg)
+		return H
 
-returns two lists of edges for Hz, Hx
-"""
-def hypergraph2BipartiteCode(G1Edges, G2Edges, n):
+
+
+	H_X = gen_H_X()
+	H_Z = gen_H_Z()
+	return (H_X, H_Z, numb_qubits, numb_stabilizers)
+
+def save_H(H_X, H_Z, N_QUBITS, N_STABLE, outfile, is_matlab=True):
+	triple_savable = {}
+	def to_triple_format(H_sparse, is_matlab):
+		offset = 1 if is_matlab else 0
+		I = [int(x + offset) for x in H_sparse.row]
+		J = [int(x + offset) for x in H_sparse.col]
+		V = [1 for x in I]
+		return I, J, V
 	
+	H_X_sparse = sparse.coo_matrix(H_X)
+	H_Z_sparse = sparse.coo_matrix(H_Z)
 
-	Hz = {}
-	Hx = {}
+	Ix, Jx, Vx = to_triple_format(H_X_sparse, is_matlab)
+	triple_savable["Ix"] = Ix
+	triple_savable["Jx"] = Jx
+	triple_savable["Vx"] = Vx
 
-	# build Hz by having 100 <= b < 200, 0 <= \alpha < 100
-	for b in range(100, 200):
-		for alpha in range(0, 100):
-			stabilizer_vertex = (b, alpha)
-			for a in range(0, 100):
-				# CHECK FOR VERTEX
-				pass
-			for beta in range(100, 200):
-				pass
-
-"""
-Create both parity check matrices (X, Z) from
-G1, G2
-"""
-def createH(G1, G2):
-	pass
-
-"""
-Save the parity check matrix
-"""
-def saveH(G, path="./expander-code.json"):
-	pass
-
-def main():
-	n = 10
-	G1 = getBipartiteGraphRoutine(n)
-	G2 = getBipartiteGraphRoutine(n)
-	print(G1)
-
-main()
+	Iz, Jz, Vz = to_triple_format(H_Z_sparse, is_matlab)
+	triple_savable["Iz"] = Iz
+	triple_savable["Jz"] = Jz
+	triple_savable["Vz"] = Vz
+	triple_savable["N_Qubits"] = N_QUBITS
+	triple_savable["N_Stabilizers"] = N_STABLE
+	with open(outfile, 'w') as outfile:
+			json.dump(triple_savable, outfile)
+	
+# TODO: test for expander property??
+for i in range(10, 15):
+	regularity=(5, 6)
+	(H_X, H_Z, N_QUBITS, N_STABLE) = gen_hx_hz(k=i, regularity=regularity)
+	save_H(H_X, H_Z, N_QUBITS, N_STABLE, f"../matlab/g-{i * regularity[1]}-{i * regularity[0]}.json")
