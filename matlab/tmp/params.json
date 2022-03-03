@@ -1,1 +1,1 @@
-{"p": 0.005, "n_trials": 5, "cutoff": 30, "file_out": "out/g-42-28.json-0.005-5-30.json"}
+{"p": 0.01, "n_trials": 10, "cutoff": 30, "file_out": "out/g-30-25.json-0.01-10-30.json"}

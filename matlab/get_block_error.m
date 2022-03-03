@@ -69,11 +69,12 @@ function success = simulate_round_filter(p, cutoff, n_qubits, Hx, Hz, n_stabiliz
         
         n_checked_over = n_checked_over + 1;
         
+        POWER_SET_MAX_SIZE = 6;
         % Get the power set of generators
-        generators_power = power_set(generators, skip_by);
+        generators_power = power_set(generators, skip_by, POWER_SET_MAX_SIZE);
         %size(generators_power)
          % Go over every set in the powerset
-         for power_set_size_div_skip_by = 1:floor(size(generators, 2) / skip_by)
+         for power_set_size_div_skip_by = 1:min(POWER_SET_MAX_SIZE, floor(size(generators, 2) / skip_by))
            power_set_size = power_set_size_div_skip_by * skip_by;
            for i = 1:size(generators_power{power_set_size}, 1)
                gRaw = generators_power{power_set_size}(i, :);
@@ -155,9 +156,9 @@ function [Hx, Hz, N_Qubits, N_Stabilizers] = get_hypergraph(json_file)
     Hz = sparse(jsonData.Iz, jsonData.Jz, jsonData.Vz, jsonData.N_Stabilizers, jsonData.N_Qubits);
 end
 
-function p = power_set(set, skip_by)
+function p = power_set(set, skip_by, max_size)
     p = {};
-    for nn = 1:floor(size(set, 2) / skip_by)
+    for nn = 1:min(max_size, floor(size(set, 2) / skip_by))
         % all the combinations taken nn items at a time
         p{nn * skip_by} = combnk(set, nn * skip_by);
     end
