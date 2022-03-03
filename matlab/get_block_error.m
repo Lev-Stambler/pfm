@@ -7,6 +7,7 @@ format shortg
 
 simulate_n_rounds(file_save_block_error, p, n_trials, cutoff, N_Qubits, Hx, Hz, N_Stabilizers, H_transpose_z_projection)
 
+% Compare with success rate of non problalistic
 function success_probability = simulate_n_rounds(file_save_block_err, p, n, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection)
  numb_successes = 0;
  for r = 1:n
@@ -55,21 +56,25 @@ function success = simulate_round_filter(p, cutoff, n_qubits, Hx, Hz, n_stabiliz
       % in syndrome size per qubit flipped
       target = -Inf;
       % Only range over the top 30 "important" stabilizers
-      to_range_over = 1:cutoff; % 1:n_stabilizers
+      if cutoff == -1
+        to_range_over = 1:n_stabilizers;
+      else
+        to_range_over = 1:cutoff;
+      end
       for overall_idx = to_range_over
         r = generators_sorted(overall_idx);
         [a, generators] = find(Hz(r, :));
         
         % Skip a generator which cannot possibly decrease the syndrome
         if numb_overlapping_potential_qubits(r) < 1 
-           disp("NO OVERLAP");
+          %disp("NO OVERLAP");
           n_unchecked_over = n_unchecked_over + 1;
           continue;
         end
         
         n_checked_over = n_checked_over + 1;
         
-        POWER_SET_MAX_SIZE = 6;
+        POWER_SET_MAX_SIZE = 100000;
         % Get the power set of generators
         generators_power = power_set(generators, skip_by, POWER_SET_MAX_SIZE);
         %size(generators_power)

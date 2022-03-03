@@ -10,7 +10,7 @@ echo "matlab exit code: $?"
 
 error_ps = [0.005, 0.01, 0.02, 0.03, 0.04]
 ks = range(5, 8)
-Ntrials = 1000
+Ntrials = 10
 cutoff = 30
 for i in ks:
     regularity = (5, 6)
