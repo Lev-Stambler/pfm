@@ -6,6 +6,7 @@ Ref: https://theory.epfl.ch/courses/topicstcs/Lecture3.pdf
 """
 
 from collections import Counter
+import shared
 import networkx as nx
 import numpy as np
 import random
@@ -186,4 +187,4 @@ for i in range(5, 10):
     regularity = (5, 6)
     (H_X, H_Z, N_QUBITS, N_STABLE) = gen_hx_hz(k=i, regularity=regularity)
     save_H(H_X, H_Z, N_QUBITS, N_STABLE,
-           f"../matlab/g-{i * regularity[1]}-{i * regularity[0]}.json")
+           shared.get_graph_file_name(i, regularity))
