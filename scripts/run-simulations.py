@@ -9,7 +9,7 @@ echo "matlab exit code: $?"
 """
 
 error_ps = [0.005, 0.01, 0.02, 0.03, 0.04]
-ks = range(10, 14)
+ks = range(12, 14)
 Ntrials = 100
 cutoff = 100
 for p in error_ps:
