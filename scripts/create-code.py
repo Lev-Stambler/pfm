@@ -183,7 +183,7 @@ def save_H(H_X, H_Z, N_QUBITS, N_STABLE, outfile, is_matlab=True):
 
 
 # TODO: test for expander property??
-for i in range(5, 10):
+for i in range(10, 14):
     regularity = (5, 6)
     (H_X, H_Z, N_QUBITS, N_STABLE) = gen_hx_hz(k=i, regularity=regularity)
     save_H(H_X, H_Z, N_QUBITS, N_STABLE,

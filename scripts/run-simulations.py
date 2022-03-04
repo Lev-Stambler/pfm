@@ -9,13 +9,13 @@ echo "matlab exit code: $?"
 """
 
 error_ps = [0.005, 0.01, 0.02, 0.03, 0.04]
-ks = range(5, 8)
-Ntrials = 10
-cutoff = 30
-for i in ks:
+ks = range(10, 14)
+Ntrials = 100
+cutoff = 100
+for p in error_ps:
     regularity = (5, 6)
-    graph_file_name = shared.get_graph_file_name(i, regularity)
-    for p in error_ps:
+    for i in ks:
+        graph_file_name = shared.get_graph_file_name(i, regularity)
         paramsf = open('../matlab/tmp/params.json', "w")
         paramsf.write(
             "{" +

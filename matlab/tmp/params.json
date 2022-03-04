@@ -1,1 +1,1 @@
-{"p": 0.005, "n_trials": 1000, "cutoff": 30, "file_out": "../matlab/out/30-25-graph-0.005-1000-30.json"}
+{"p": 0.005, "n_trials": 100, "cutoff": 100, "file_out": "../matlab/out/66-55-graph-0.005-100-100.json"}
