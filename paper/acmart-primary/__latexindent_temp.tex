@@ -1,0 +1,10 @@
+\begin{algorithm}
+	\caption{$\texttt{probabilistic-set-flip($E$)}$}\label{alg:two}
+	\KwData{A syndrome $\sigma_0 \in \FSyndrome$}
+	\KwResult{Deduced error $\DeducedE$ if the algorithm converges and $\bot$ otherwise}
+	$\DeducedE \gets 0^{\NQubits}$\;
+	$\sigma \gets \sigma_0$\;
+		While{$\exists F \in \GeneratorField: |\sigma| - |\sigma \xor \sigma_X(F)| > 0$}{
+		$aa$
+	}
+	\end{algorithm}

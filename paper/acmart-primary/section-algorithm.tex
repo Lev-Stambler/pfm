@@ -1,0 +1,31 @@
+\begin{algorithm}
+	\caption{$\texttt{sort-top-K(T)}$}\label{alg:sort-top-k}
+	\KwData{A vector $T \in \ZQubits$}
+	\KwResult{A set $S$ of the top $K$ indices in $T$}
+	\BlankLine
+	$S \gets \texttt{indices of a descending radix sort of $T$'s rows}$\;
+	\BlankLine
+	\Return A set of the top $K$ indices in $S$\;
+\end{algorithm}
+
+% Main algorithm
+\begin{algorithm}
+	\caption{$\texttt{probabilistic-set-flip($E$)}$}\label{alg:pfm}
+	\KwData{A syndrome $\sigma_0 \in \FSyndrome$}
+	\KwResult{Deduced error $\DeducedE$ if the algorithm converges and $\bot$ otherwise}
+	$\DeducedE \gets 0^{\NQubits}$\;
+	$\sigma \gets \sigma_0$\;
+		\While{$\exists F \in \GeneratorField: \OptNumerator > 0$}{
+			$T \gets H_Z H_X^T \sigma$\;
+			$\texttt{generators} \gets \texttt{sort-top-K}(T)$\;
+			$\texttt{to-check} \gets \bigcup_{i \in \texttt{generators}} \mathcal{P}({\C_Z}_i)$\;
+			$F \gets \arg \max_{F \in \texttt{to-check}} \frac{
+				\OptNumerator
+			}{
+				|F|
+			}$\;
+			$\DeducedE \gets \DeducedE \xor F$\;
+			$\sigma \gets \sigma \xor \sigma_X(F)$\;	
+		}
+		\Return $\DeducedE$ if $|\sigma| = 0$, $\bot$ otherwise.
+\end{algorithm}
