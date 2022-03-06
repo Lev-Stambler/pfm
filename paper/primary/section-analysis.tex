@@ -1,0 +1,67 @@
+\newcommand{\bitscorevec}{\boldsymbol{b}}
+\newcommand{\bitscoreRV}{B}
+\newcommand{\syndromeRV}{S}
+\newcommand{\generatorscorevec}{\boldsymbol{g}}
+\newcommand{\generatorscoreRV}{G}
+\newcommand{\synd}{\boldsymbol{\boldsymbol{\sigma_X}}}
+\newcommand{\NTQ}{{\Delta_{\text{stablizer}}}}
+\newcommand{\NTS}{{\Delta_{\text{bit}}}}
+\newcommand{\errorvec}{\boldsymbol{\boldsymbol{e}}}
+
+% TODO: say we are working with (a, b) regular graphs. 
+% TODO: say we are working with a $(\gamma, \delta)$ expander code
+
+The following section assumes that we are working with syndrome $\synd$,
+a generator matrix $H_Z$, and parity check matrix $H_X$.
+The analysis is the same for a syndrome, $\boldsymbol{\sigma_Z}$, generator matrix $H_X$, and
+parity check matrix $H_Z$.
+
+\subsection*{Notation}
+Given a vector $\boldsymbol{v}$, define $v_i$ to be the value of the $i$th row of $\boldsymbol{v}$.
+
+\subsection*{Definitions}
+Let $\NTQ$ equal to the degree of a stabilizer vertex. Note that due to the hypergraph's construction,
+all stabilizers have the same constant degree. 
+Let $\NTS$ equal to the degree of a qubit vertex. As with the stabilizers, all qubits have the same constant degree.
+
+Given a syndrome, $\synd$, define a ``bit-score vector", $\bitscorevec = H_X^T \synd$ where
+$\bitscorevec \in \Z^{\NQubits}$. 
+Then, define a ``generator-score vector" as $\generatorscorevec = H_z \bitscorevec $ where
+$\generatorscorevec \in \Z^{\NStables}$. 
+Moreover, assume that for error $e \in \F_2^{\NQubits}$, $\Pr\mleft[e_i = 1\mright] = p$ for all $i \in [\NQubits]$ (i.e.\ 
+the error is modeled as independent). Let $q = 1-p$.
+Let $s_1, s_2, ..., s_{\NStables}$ denote the set of stabilizer vertices.
+Let $N_i = \sum_{j \in \Gamma(s_i)} \errorvec_j$ where $N_i \in \Z$. $N_i$ can be thought of
+as the number of qubits with an error in the neighborhood of $N_i$.
+
+Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
+correspond to $\generatorscorevec_i$. Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$.
+
+\newcommand{\SPr}{\half - \half\mleft(1-2p\mright)^\NTQ}
+\begin{align*}
+	\Pr[S_i = 1] = \Pr\mleft[\texttt{$N_i$ is odd}\mright] = \SPr
+\end{align*}
+
+So,
+$$
+	\syndromeRV \sim \texttt{Bernoulli}\mleft(\SPr\mright).
+$$
+
+Then,
+% TODO: better like neighbourhood thingy
+$$
+	\bitscoreRV = \sum_{j \in [\NTS]} \syndromeRV_j
+$$
+So, 
+$$
+	\bitscoreRV \sim \texttt{Binom}(\NTS, \SPr)
+$$
+
+% STEPS:
+% \begin{align*}
+% 	\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] &=
+% 		\Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
+% 		&= \half + \half \mleft( 1 - 2p\mright)^\NTQ - q^\NTQ
+% \end{align*}
+
+% Then, assuming that $p < 0.5$, $\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] < \half$
