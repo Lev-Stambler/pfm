@@ -17,7 +17,7 @@
 	$\sigma \gets \sigma_0$\;
 		\While{$\exists F \in \GeneratorField: \OptNumerator > 0$}{
 			$T \gets H_Z H_X^T \sigma$\;
-			$\texttt{generators} \gets \texttt{sort-top-K}(T)$\;
+			$\texttt{generators} \gets \texttt{sort-top-K}(T)$\;\label{alg:pfm:line:assign} 
 			$\texttt{to-check} \gets \bigcup_{i \in \texttt{generators}} \mathcal{P}({\C_Z}_i)$\;
 			$F \gets \arg \max_{F \in \texttt{to-check}} \frac{
 				\OptNumerator

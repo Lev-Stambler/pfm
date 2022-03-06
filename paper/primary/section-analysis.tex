@@ -1,4 +1,5 @@
 \newcommand{\bitscorevec}{\boldsymbol{b}}
+\newcommand{\genscoreRVCorrected}{G'}
 \newcommand{\bitscoreRV}{B}
 \newcommand{\syndromeRV}{S}
 \newcommand{\generatorscorevec}{\boldsymbol{g}}
@@ -44,18 +45,62 @@ correspond to $\generatorscorevec_i$. Also, let random variable $\syndromeRV_i \
 
 So,
 $$
-	\syndromeRV \sim \texttt{Bernoulli}\mleft(\SPr\mright).
+	\syndromeRV_i \sim \texttt{Bernoulli}\mleft(\SPr\mright).
 $$
 
+% TODO: NEXT STEP: TRELLO / WEEK IN ADVANCE
 Then,
 % TODO: better like neighbourhood thingy
 $$
-	\bitscoreRV = \sum_{j \in [\NTS]} \syndromeRV_j
+	\bitscoreRV_i = \sum_{\texttt{Stabilizer $j$} \; \in \; \Gamma(\texttt{Bit $i$})} \syndromeRV_j
 $$
 So, 
 $$
-	\bitscoreRV \sim \texttt{Binom}(\NTS, \SPr)
+	\bitscoreRV_i \sim \texttt{Binom}(\NTS, \SPr).
 $$
+
+And then,
+$$
+	\generatorscoreRV_k =
+		\sum_{\texttt{Bit $i$} \; \in \; \Gamma(\texttt{generator } k)}\;
+			\sum_{\texttt{Stabilizer } j \; \in \; \Gamma(\texttt{Bit } i)}
+				\syndromeRV_j
+$$
+
+So then,
+$$
+	\generatorscoreRV_k \sim \texttt{Binom}(\NTS \NTQ, \SPr).
+$$
+
+The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
+gets the $K$ generators, indexed by $g_1, g_2, ..., g_K$, with the top values
+of $\generatorscorevec_i$ for $i \in [\NStables]$. WLOG, assume
+$\generatorscorevec_{g_1} \geq \generatorscorevec_{g_2} \geq ... \geq \generatorscorevec_{g_K}$.
+Then, we can think of $\E[\generatorscorevec_{g_i}]$ as the expected value of the $i$ 
+top sample from $\NStables$ samples from the distribution defining $\generatorscoreRV_i$.
+
+Then, let $\genscoreRVCorrected$ be the normalized version of $\generatorscoreRV$ where
+$$
+	\genscoreRVCorrected = \frac{\generatorscoreRV - \mu}{\sigma}
+$$
+where $\mu = \NTS \NTQ \SPr$ and $\sigma = \sqrt{\NTS \NTQ \SPr (1 - \SPr)}$.
+
+We then know that by the BLANK BLANK BOUND TODO:,
+$$
+	|\Pr[\genscoreRVCorrected \geq u] - \Pr[Z \geq u]| \leq O(\beta)
+$$
+where
+$$
+	\beta = \sum_{i=1}^{\NTS \NTQ} \E\mleft[\mleft|\frac{1 - \mu}{\sigma}\mright|^3\mright]
+	= O\mleft(\frac{1}{\sqrt{\NTS \NTQ}\mright)
+$$
+
+
+% where $\genscoreRVCorrected$ is a random variable and $\genscoreRVCorrected \in Z$.
+
+% Note that due to the expander graph property, generator $k$ has at least 
+% $(1 - \delta)\NTQ$ unique stabilizer vertices in its neighborhood.
+
 
 % STEPS:
 % \begin{align*}

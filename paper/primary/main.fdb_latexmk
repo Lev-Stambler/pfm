@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1646601099 "main.aux" "main.bbl" "main" 1646601100
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 0
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1646601100 5336 7f809e732bb77c6a6f75ba5a3f1a44f1 "pdflatex"
+  "main.aux" 0 -1 0 "pdflatex"
   "references.bib" 1646405059 917 dfc437031a233691152b0896409e2867 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1646601099 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1646601100
+["pdflatex"] 1646608820 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1646608820
   "/home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1646406364 6964 d538b4c5c37c562ac2f35852f5d4dbbf ""
   "/home/lev/code/research/pfm/paper/primary/main.tex" 1646598118 4806 64fdadbbf1897ec90ddbb46ac81260fd ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -220,18 +220,16 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1642605541 4379201 880d78f4a2bde4f491e7d718ab91f390 ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1642605583 2796620 8a1a95f7408ee5fc56f565bc9a0ba6f6 ""
   "/usr/local/texlive/2021/texmf.cnf" 1642605535 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "CustomCommands.sty" 1646600276 8003 5e16d8819f5783ba278cadf21592e35f ""
+  "CustomCommands.sty" 1646608055 8054 5feb27e94d95cd04aceb99731a5404ab ""
   "PRIMEarxiv.sty" 1646406960 7735 534e50c649b95e8b8e697fb445f66f35 ""
-  "main.aux" 1646601100 5336 7f809e732bb77c6a6f75ba5a3f1a44f1 "pdflatex"
-  "main.bbl" 1646601099 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
-  "main.brf" 1646601100 107 ddc97d17b5de2f923331c41032933e4b "pdflatex"
-  "main.out" 1646601100 2269 194becf20f698a98607da5aec8e83345 "pdflatex"
+  "main.aux" 1646608820 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.bbl" 0 -1 0 "bibtex main"
+  "main.out" 0 -1 0 "pdflatex"
   "main.tex" 1646598118 4806 64fdadbbf1897ec90ddbb46ac81260fd ""
-  "section-algorithm.tex" 1646574013 1143 4eaed2cc9c61275f5672fabd08aa0c8c ""
-  "section-analysis.tex" 1646601097 2765 d777a55d48c3d3197276761363c97735 ""
+  "section-algorithm.tex" 1646607915 1171 2e1b5ab154b049a3becc88efd6b4a785 ""
+  "section-analysis.tex" 1646608818 4403 540edb6c8dbd4267b8d38ab955f75779 ""
   (generated)
   "main.aux"
-  "main.brf"
   "main.log"
   "main.out"
   "main.pdf"
