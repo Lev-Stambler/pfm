@@ -1,4 +1,6 @@
 \newcommand{\bitscorevec}{\boldsymbol{b}}
+\newcommand{\lyingIndividual}{L}
+\newcommand{\lyingGenerator}{E}
 \newcommand{\genscoreRVCorrected}{G'}
 \newcommand{\bitscoreRV}{B}
 \newcommand{\syndromeRV}{S}
@@ -24,6 +26,8 @@ Given a vector $\boldsymbol{v}$, define $v_i$ to be the value of the $i$th row o
 Let $\NTQ$ equal to the degree of a stabilizer vertex. Note that due to the hypergraph's construction,
 all stabilizers have the same constant degree. 
 Let $\NTS$ equal to the degree of a qubit vertex. As with the stabilizers, all qubits have the same constant degree.
+Also, for generator $k$, let $\aleph$ be the set of stabilizers neighboring the generator.
+Note that $|\aleph| \leq \NTQ \NTS$.
 
 Given a syndrome, $\synd$, define a ``bit-score vector", $\bitscorevec = H_X^T \synd$ where
 $\bitscorevec \in \Z^{\NQubits}$. 
@@ -33,7 +37,7 @@ Moreover, assume that for error $e \in \F_2^{\NQubits}$, $\Pr\mleft[e_i = 1\mrig
 the error is modeled as independent). Let $q = 1-p$.
 Let $s_1, s_2, ..., s_{\NStables}$ denote the set of stabilizer vertices.
 Let $N_i = \sum_{j \in \Gamma(s_i)} \errorvec_j$ where $N_i \in \Z$. $N_i$ can be thought of
-as the number of qubits with an error in the neighborhood of $N_i$.
+as the number of qubits with an error in the neighborhood of stabilizer $i$.
 
 Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
 correspond to $\generatorscorevec_i$. Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$.
@@ -76,24 +80,84 @@ The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
 gets the $K$ generators, indexed by $g_1, g_2, ..., g_K$, with the top values
 of $\generatorscorevec_i$ for $i \in [\NStables]$. WLOG, assume
 $\generatorscorevec_{g_1} \geq \generatorscorevec_{g_2} \geq ... \geq \generatorscorevec_{g_K}$.
-Then, we can think of $\E[\generatorscorevec_{g_i}]$ as the expected value of the $i$ 
-top sample from $\NStables$ samples from the distribution defining $\generatorscoreRV_i$.
+Then, we can think of $\E[\generatorscoreRV_{g_i}]$ as the expected value of the $i$th
+top sample from $\NStables$ samples of the distribution defining $\generatorscoreRV_i$.
 
-Then, let $\genscoreRVCorrected$ be the normalized version of $\generatorscoreRV$ where
+Let random variable $\genscoreRVCorrected_k$ then equal
 $$
-	\genscoreRVCorrected = \frac{\generatorscoreRV - \mu}{\sigma}
+	\genscoreRVCorrected_k =
+		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k} \syndromeRV_j.
 $$
-where $\mu = \NTS \NTQ \SPr$ and $\sigma = \sqrt{\NTS \NTQ \SPr (1 - \SPr)}$.
 
-We then know that by the BLANK BLANK BOUND TODO:,
-$$
-	|\Pr[\genscoreRVCorrected \geq u] - \Pr[Z \geq u]| \leq O(\beta)
-$$
-where
-$$
-	\beta = \sum_{i=1}^{\NTS \NTQ} \E\mleft[\mleft|\frac{1 - \mu}{\sigma}\mright|^3\mright]
-	= O\mleft(\frac{1}{\sqrt{\NTS \NTQ}\mright)
-$$
+Note that $|\aleph| \geq (1 - \delta) \NTQ \NTS$ because we are working with expander codes.
+So then, \begin{align*}
+	\E[\genscoreRVCorrected_k] &= 
+		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k} \E[\syndromeRV_j] \\
+		&\geq (1 - \delta) \NTQ \NTS \E_{j \in [\NStables]}[\syndromeRV_j]\\
+		&\geq (1 - \delta) \E[\generatorscoreRV_k].
+\end{align*}
+
+% Then, let $\genscoreRVCorrected$ be the normalized version of $\generatorscoreRV$ where
+% $$
+% 	\genscoreRVCorrected = \frac{\generatorscoreRV - \mu}{\sigma}
+% $$
+
+% \newcommand{\muexp}{\NTS \NTQ \mleft(\SPr\mright)}
+% \newcommand{\sigmaexp}{ \sqrt{\NTS \NTQ (\SPr) (1 - (\SPr))}}
+% where $\mu = \muexp$ and $\sigma = \sigmaexp$.
+
+% For a standard Gaussian random variable, $Z$, we then know that by the BLANK BLANK BOUND TODO:,
+% $$
+% 	|\Pr[\genscoreRVCorrected \geq u] - \Pr[Z \geq u]| \leq 0.56 \cdot (\beta)
+% $$
+% where
+% % Hmmm... not sure about Beta bound
+% % Hmmm.. about equal
+% % TODO: NORMALIZE, put into appendix the proof
+% $$
+% 	\beta =
+% 		\sum_{i=1}^{\NTS \NTQ} \E\mleft[|B'_i|^3\mright] \leq \frac{0.56}{\sqrt{\NTS \NTQ}}
+% $$
+
+% 	% &\leq \sum_{i=1}^{\NTS \NTQ} \E\mleft[\mleft|\frac{1}{\sigma}\mright|^3\mright] \\
+% 	% &= \frac{\NTS \NTQ}{\sigmaexp^3}\\
+% 	% &= \frac{\NTS \NTQ}{
+% 	% 	\sqrt{
+% 	% 		\NTS \NTQ \mleft(\frac{1}{4} - \frac{\mleft(1-2p\mright)^\NTQ}{4}\mright)
+% 	% 	}
+% 	% }.
+% % TODO: SMTHNG WRONG HERE
+
+% So then, 
+% $
+% 	\Pr[\genscoreRVCorrected \geq u] \leq O(\beta) + \Pr[Z \geq u]
+% $,
+% and by TODO: we know that $\Pr[Z \geq u] \leq \frac{\phi(u)}{u}$. Combining the two equations,
+% we get that 
+% $$
+% 	\Pr[\genscoreRVCorrected \geq u] \leq O(\beta) + \frac{\phi(u)}{u}.
+% $$
+% For $i \in [\NStables]$, if we then fix $\Pr[\genscoreRVCorrected \geq u] = \frac{i}{\NStables}$
+% and solve for $u$ we can get the expected value of $u$ such that $\genscoreRVCorrected$ is larger than
+% or equal to the value the top $i$ samples from $\NStables$.
+% So then, if we solve for $u$ such that $O(\beta) + \frac{\phi(u)}{u} = \frac{i}{\NStables}$,
+% we can get a lower bound on $u$ for the expected value of the top $i$th sample.
+% Using Sage, we get 
+% $$
+% u \geq \frac{\sqrt{{\NTQ} {\NTS}} M \cdot e^{\left(-\frac{1}{2} \, u^{2}\right)}}{\sqrt{2 \pi {\NTQ} {\NTS}} K - 14 \, \sqrt{2} \sqrt{\pi} M}.
+% $$
+% \newcommand{\uNonLn}{\frac{\sqrt{{\NTQ} {\NTS}} M}{\sqrt{2 \pi {\NTQ} {\NTS}} K - 14 \, \sqrt{2} \sqrt{\pi} M}}
+
+% So then,
+% \begin{align*}
+% 	\frac{u}{\exp(-\half u^2)} &\geq \uNonLn\\
+% 	\Rightarrow \half u^2 + \ln u &\geq \ln \uNonLn \\
+% 	\Rightarrow u &\geq \sqrt{2 \ln \uNonLn} \cdot (1 - \epsilon) \\
+% \end{align*}
+
+% for some sufficiently large $u$ and $\epsilon > 0$.
+
+% Then, get that $u >= SMTHNG $ or something for SMTHNG SMTHNG.
 
 
 % where $\genscoreRVCorrected$ is a random variable and $\genscoreRVCorrected \in Z$.
@@ -103,10 +167,86 @@ $$
 
 
 % STEPS:
-% \begin{align*}
-% 	\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] &=
-% 		\Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
-% 		&= \half + \half \mleft( 1 - 2p\mright)^\NTQ - q^\NTQ
-% \end{align*}
+Next, define indicator random variable, $\lyingIndividual_j$ to be $1$ if $\synd_i = 0$ and $N_i > 0$.
+Basically, $\lyingIndividual_j$ indicates whether a stabilizer check succeeds, but an error is in
+its neighborhood. I.e.\ stabilizer $j$ is ``lying."
+
+\newcommand{\LyingIndivPr}{\half + \half \mleft( 1 - 2p\mright)^\NTQ - (1-p)^\NTQ}
+
+% TODO: reference pr even (idk via some txtbook)
+So then,
+\begin{align*}
+	\Pr[L_j = 1] &= \Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] \\
+		&= \Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
+		&= \LyingIndivPr
+\end{align*}
+
+
+Then define random variable, $\lyingGenerator_k$ to be
+$$
+	\lyingGenerator_k = 
+		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph}\;
+				\lyingIndividual_j.
+$$
+
+$\lyingGenerator_k$ is basically the number of time a generator $k$, lies for all
+stabilizers neighboring the generator.
+
+We can then say that
+$$
+	\lyingGenerator_k \sim \texttt{Binom}(\NTS \NTQ, \LyingIndivPr).
+$$
+% % Put into lemma
+% So then we can see that $$
+% 	\E[\lyingGenerator_k] = 
+% 		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k}\ \E[L_j] \leq \NTQ \NTS \E[L_j]
+% 		= \NTQ \NTS \mleft(\LyingIndivPr\mright).
+% % TODO: negative correlation argument!!!!!
+% $$
+
+\begin{lemma}{For a generator, given $\lyingGenerator_k$ and $\genscoreRVCorrected$,
+\label{lemma:decrby}
+	we can find some correction vector $\correctionvec \in \F_2^\NQubits$
+	such that \linebreak $\OptNumerator \geq \genscoreRVCorrected_k - \lyingGenerator_k$}
+	and $|k| \leq \frac{1-\delta}{\NTS} (\genscoreRVCorrected_k + \lyingGenerator_k)$ for $\genscoreRVCorrected > \lyingGenerator_k$.
+	\begin{proof}
+		TODO:	 part 1 is that there are 3 types of stabilizers in neighbourhood.
+		Those from G', those from E, and those in neither. If those in neither, there is no
+		neighbourhood in their error, so you can leave those bits alone. Then, by flipping bits
+		connected to G' you decrease syndrome by G', but you add in at most E'
+		
+		part 2: each flipping bit effects at least (1-delta) $\NTS$stables
+	\end{proof}
+\end{lemma}
+
+
+So then, by TODO: cite hypergraph prod paper, we know that we can always successfully
+correct errors if, for each round of the while loop,
+$$
+	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
+$$
+
+\newcommand{\OptVarRV}{Q}
+\newcommand{\OptVarEq}{
+\frac
+			{\NTS \mleft(\genscoreRVCorrected_{g_i} - \lyingGenerator_{g_i}\mright)}
+			{(1 - \delta)(\genscoreRVCorrected_{g_i} + \lyingGenerator_{g_k})}
+			\geq \frac{1}{3}
+}
+So then, \begin{align*}
+	\Pr\mleft[\texttt{loop cannot find a correcting error}\mright] &\leq
+		\prod_{i \in [K]} \mleft(1 - \Pr\mleft[\OptVarEq\mright]\mright)
+\end{align*}
+
+% Hmmmmm.... I think just run simulations on the above ^^ (j draw from G', E...)
+% Let the random variable $Q(K)$ then equal $\OptVarEq$.
+
+% So then, for a given $K$,
+% $$
+% 	\Pr\mleft[Q(K) \geq \frac{1}{3}\mright] = 1 - \Pr[Q(K) \leq \frac{1}{3}] \geq 1 - \frac{}{}
+% $$
+
+ lemma \ref{lemma:decrby}, 
+
 
 % Then, assuming that $p < 0.5$, $\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] < \half$

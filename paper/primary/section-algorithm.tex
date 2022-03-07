@@ -19,13 +19,13 @@
 			$T \gets H_Z H_X^T \sigma$\;
 			$\texttt{generators} \gets \texttt{sort-top-K}(T)$\;\label{alg:pfm:line:assign} 
 			$\texttt{to-check} \gets \bigcup_{i \in \texttt{generators}} \mathcal{P}({\C_Z}_i)$\;
-			$F \gets \arg \max_{F \in \texttt{to-check}} \frac{
+			$\correctionvec \gets \arg \max_{\correctionvec \in \texttt{to-check}} \frac{
 				\OptNumerator
 			}{
-				|F|
+				|\correctionvec|
 			}$\;
-			$\DeducedE \gets \DeducedE \xor F$\;
-			$\sigma \gets \sigma \xor \sigma_X(F)$\;	
+			$\DeducedE \gets \DeducedE \xor \correctionvec$\;
+			$\sigma \gets \sigma \xor \sigma_X(\correctionvec)$\;	
 		}
 		\Return $\DeducedE$ if $|\sigma| = 0$, $\bot$ otherwise.
 \end{algorithm}
