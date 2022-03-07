@@ -8,22 +8,24 @@ format shortg
 simulate_n_rounds(file_save_block_error, p, n_trials, cutoff, N_Qubits, Hx, Hz, N_Stabilizers, H_transpose_z_projection)
 
 % Compare with success rate of non problalistic
-function success_probability = simulate_n_rounds(file_save_block_err, p, n, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection)
- numb_successes = 0;
+function simulate_n_rounds(file_save_block_err, p, n, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection)
+ numb_successes_k_top = 0;
+ numb_successes_all = 0;
  for r = 1:n
    fprintf("\nRunning round %d\n\n", r);
-   numb_successes = numb_successes + simulate_round_filter(p, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection);
+   error = get_random_error(p, n_qubits);
+   numb_successes_k_top = numb_successes_k_top + simulate_round_filter(error, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection);
+   numb_successes_all = numb_successes_all + simulate_round_filter(error, -1, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection);
  end
- block_error_rate = 1 - numb_successes / n;
+ block_error_rate = 1 - numb_successes_k_top / n;
  fprintf("\n Block error rate: %d\n", block_error_rate);
  fileID = fopen(file_save_block_err, 'w');
- fwrite(fileID, string(block_error_rate));
+ fwrite(fileID, "N: " + string(n_trials) + "K Top Successes: " + string(numb_successes_k_top) + "All Generator Successes: " + string(numb_successes_all));
  fclose(fileID);
 end
 
 % Currently only runs one loop iteration of the small set flip error
-function success = simulate_round_filter(p, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection)
-  error = get_random_error(p, n_qubits);
+function success = simulate_round_filter(error, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection)
   current_correction = sparse(1:n_qubits, repelem(1, n_qubits), repelem(0, n_qubits), n_qubits, 1);
   syndrome = matmul(Hx, error);
   current_syndrome = syndrome;
