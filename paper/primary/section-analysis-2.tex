@@ -39,48 +39,13 @@ Let $s_1, s_2, ..., s_{\NStables}$ denote the set of stabilizer vertices.
 Let $N_i = \sum_{j \in \Gamma(s_i)} \errorvec_j$ where $N_i \in \Z$. $N_i$ can be thought of
 as the number of qubits with an error in the neighborhood of stabilizer $i$.
 
-Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$. Then we know that
+Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
+correspond to $\generatorscorevec_i$. Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$.
 
 \newcommand{\SPr}{\half - \half\mleft(1-2p\mright)^\DegStable}
 \begin{align*}
-	\Pr[S_i = 1] = \Pr\mleft[\texttt{$N_i$ is odd}\mright] = \SPr.
+	\Pr[S_i = 1] = \Pr\mleft[\texttt{$N_i$ is odd}\mright] = \SPr
 \end{align*}
-
-Next, define indicator random variable, $\lyingIndividual_j$ to be $1$ if $\synd_i = 0$ and $N_i > 0$.
-Basically, $\lyingIndividual_j$ indicates whether a stabilizer check succeeds, but an error is in
-its neighborhood. I.e.\ stabilizer $j$ is ``lying."
-
-\newcommand{\LyingIndivPr}{\half + \half \mleft( 1 - 2p\mright)^\DegStable - (1-p)^\DegStable}
-
-% TODO: reference pr even (idk via some txtbook)
-So then,
-\begin{align*}
-	\Pr[L_j = 1] &= \Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] \\
-		&= \Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
-		&= \LyingIndivPr.
-\end{align*}
-
-
-Then define random variable, $\lyingGenerator_k$ to be
-$$
-	\lyingGenerator_k = 
-		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k}\;
-				\lyingIndividual_j.
-$$
-
-$\lyingGenerator_k$ is basically the number of time a generator $k$, lies for all
-stabilizers neighboring the generator.
-
-We can then say that
-$$
-	\lyingGenerator_k \sim \texttt{Binom}(\aleph_k, \LyingIndivPr).
-$$
-
-
-
-Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
-correspond to $\generatorscorevec_i$. 
-
 
 So,
 $$
@@ -132,8 +97,105 @@ So then, \begin{align*}
 		&\geq (1 - \delta) \E[\generatorscoreRV_k].
 \end{align*}
 
-% STEPS:
+% Then, let $\genscoreRVCorrected$ be the normalized version of $\generatorscoreRV$ where
+% $$
+% 	\genscoreRVCorrected = \frac{\generatorscoreRV - \mu}{\sigma}
+% $$
 
+% \newcommand{\muexp}{\DegBit \DegStable \mleft(\SPr\mright)}
+% \newcommand{\sigmaexp}{ \sqrt{\DegBit \DegStable (\SPr) (1 - (\SPr))}}
+% where $\mu = \muexp$ and $\sigma = \sigmaexp$.
+
+% For a standard Gaussian random variable, $Z$, we then know that by the BLANK BLANK BOUND TODO:,
+% $$
+% 	|\Pr[\genscoreRVCorrected \geq u] - \Pr[Z \geq u]| \leq 0.56 \cdot (\beta)
+% $$
+% where
+% % Hmmm... not sure about Beta bound
+% % Hmmm.. about equal
+% % TODO: NORMALIZE, put into appendix the proof
+% $$
+% 	\beta =
+% 		\sum_{i=1}^{\DegBit \DegStable} \E\mleft[|B'_i|^3\mright] \leq \frac{0.56}{\sqrt{\DegBit \DegStable}}
+% $$
+
+% 	% &\leq \sum_{i=1}^{\DegBit \DegStable} \E\mleft[\mleft|\frac{1}{\sigma}\mright|^3\mright] \\
+% 	% &= \frac{\DegBit \DegStable}{\sigmaexp^3}\\
+% 	% &= \frac{\DegBit \DegStable}{
+% 	% 	\sqrt{
+% 	% 		\DegBit \DegStable \mleft(\frac{1}{4} - \frac{\mleft(1-2p\mright)^\DegStable}{4}\mright)
+% 	% 	}
+% 	% }.
+% % TODO: SMTHNG WRONG HERE
+
+% So then, 
+% $
+% 	\Pr[\genscoreRVCorrected \geq u] \leq O(\beta) + \Pr[Z \geq u]
+% $,
+% and by TODO: we know that $\Pr[Z \geq u] \leq \frac{\phi(u)}{u}$. Combining the two equations,
+% we get that 
+% $$
+% 	\Pr[\genscoreRVCorrected \geq u] \leq O(\beta) + \frac{\phi(u)}{u}.
+% $$
+% For $i \in [\NStables]$, if we then fix $\Pr[\genscoreRVCorrected \geq u] = \frac{i}{\NStables}$
+% and solve for $u$ we can get the expected value of $u$ such that $\genscoreRVCorrected$ is larger than
+% or equal to the value the top $i$ samples from $\NStables$.
+% So then, if we solve for $u$ such that $O(\beta) + \frac{\phi(u)}{u} = \frac{i}{\NStables}$,
+% we can get a lower bound on $u$ for the expected value of the top $i$th sample.
+% Using Sage, we get 
+% $$
+% u \geq \frac{\sqrt{{\DegStable} {\DegBit}} M \cdot e^{\left(-\frac{1}{2} \, u^{2}\right)}}{\sqrt{2 \pi {\DegStable} {\DegBit}} K - 14 \, \sqrt{2} \sqrt{\pi} M}.
+% $$
+% \newcommand{\uNonLn}{\frac{\sqrt{{\DegStable} {\DegBit}} M}{\sqrt{2 \pi {\DegStable} {\DegBit}} K - 14 \, \sqrt{2} \sqrt{\pi} M}}
+
+% So then,
+% \begin{align*}
+% 	\frac{u}{\exp(-\half u^2)} &\geq \uNonLn\\
+% 	\Rightarrow \half u^2 + \ln u &\geq \ln \uNonLn \\
+% 	\Rightarrow u &\geq \sqrt{2 \ln \uNonLn} \cdot (1 - \epsilon) \\
+% \end{align*}
+
+% for some sufficiently large $u$ and $\epsilon > 0$.
+
+% Then, get that $u >= SMTHNG $ or something for SMTHNG SMTHNG.
+
+
+% where $\genscoreRVCorrected$ is a random variable and $\genscoreRVCorrected \in Z$.
+
+% Note that due to the expander graph property, generator $k$ has at least 
+% $(1 - \delta)\DegStable$ unique stabilizer vertices in its neighborhood.
+
+
+% STEPS:
+Next, define indicator random variable, $\lyingIndividual_j$ to be $1$ if $\synd_i = 0$ and $N_i > 0$.
+Basically, $\lyingIndividual_j$ indicates whether a stabilizer check succeeds, but an error is in
+its neighborhood. I.e.\ stabilizer $j$ is ``lying."
+
+\newcommand{\LyingIndivPr}{\half + \half \mleft( 1 - 2p\mright)^\DegStable - (1-p)^\DegStable}
+
+% TODO: reference pr even (idk via some txtbook)
+So then,
+\begin{align*}
+	\Pr[L_j = 1] &= \Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] \\
+		&= \Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
+		&= \LyingIndivPr
+\end{align*}
+
+
+Then define random variable, $\lyingGenerator_k$ to be
+$$
+	\lyingGenerator_k = 
+		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph}\;
+				\lyingIndividual_j.
+$$
+
+$\lyingGenerator_k$ is basically the number of time a generator $k$, lies for all
+stabilizers neighboring the generator.
+
+We can then say that
+$$
+	\lyingGenerator_k \sim \texttt{Binom}(\DegBit \DegStable, \LyingIndivPr).
+$$
 % % Put into lemma
 % So then we can see that $$
 % 	\E[\lyingGenerator_k] = 
@@ -158,8 +220,8 @@ So then, \begin{align*}
 \end{lemma}
 
 
-So then for any $\errorvec$ where $|\errorvec| < \min(\gamma_An_A, \gamma_Bn_B)$ by TODO: cite hypergraph prod paper, we know that we can always successfully
-correct errors if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
+So then, by TODO: cite hypergraph prod paper, we know that we can always successfully
+correct errors if, for each round of the while loop,
 $$
 	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
 $$
@@ -170,24 +232,6 @@ $$
 			{\DegBit \mleft(\genscoreRVCorrected_{g_i} - \lyingGenerator_{g_i}\mright)}
 			{(1 - \delta)(\genscoreRVCorrected_{g_i} + \lyingGenerator_{g_k})}
 }
-
-\begin{lemma}{We claim the following holds for an $i \in [K]$ and for $p_S = \Pr[S_j = 1]$ for any stabilizer $j$}
-	
-\begin{align*}
-	&\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] \\
-	\leq &\sum_{e = 0}^{\DegBit - 1} 
-			\OrderP\mleft(\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}\mright) \cdot \Pr[E_{g_i} = e] 
-			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[E_{g_i} = e]
-\end{align*}
-where
-$$
-	\OrderP(n, p, i, v) = \Pr\mleft[W_i \leq v \mright]
-$$
-and $W_i$ is the $i$th largest order statistic from $M$ samples of $\texttt{Binomial}(n, p)$.
-
-See appendix TODO: cite for details
-\end{lemma}
-
 So then, \begin{align*}
 	\Pr\mleft[\texttt{loop cannot find a correcting error}\mright] &\leq
 		\prod_{i \in [K]} \Pr\mleft[\OptVarEq < \frac{1}{3} \mright]

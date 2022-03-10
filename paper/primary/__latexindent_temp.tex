@@ -5,8 +5,8 @@
 \newcommand{\generatorscorevec}{\boldsymbol{g}}
 \newcommand{\generatorscoreRV}{G}
 \newcommand{\synd}{\boldsymbol{\boldsymbol{\sigma_X}}}
-\newcommand{\NTQ}{{\Delta_{\text{stablizer}}}}
-\newcommand{\NTS}{{\Delta_{\text{bit}}}}
+\newcommand{\DegStable}{{\Delta_{\text{stablizer}}}}
+\newcommand{\DegBit}{{\Delta_{\text{bit}}}}
 \newcommand{\errorvec}{\boldsymbol{\boldsymbol{e}}}
 
 % TODO: say we are working with (a, b) regular graphs. 
@@ -21,9 +21,9 @@ parity check matrix $H_Z$.
 Given a vector $\boldsymbol{v}$, define $v_i$ to be the value of the $i$th row of $\boldsymbol{v}$.
 
 \subsection*{Definitions}
-Let $\NTQ$ equal to the degree of a stabilizer vertex. Note that due to the hypergraph's construction,
+Let $\DegStable$ equal to the degree of a stabilizer vertex. Note that due to the hypergraph's construction,
 all stabilizers have the same constant degree. 
-Let $\NTS$ equal to the degree of a qubit vertex. As with the stabilizers, all qubits have the same constant degree.
+Let $\DegBit$ equal to the degree of a qubit vertex. As with the stabilizers, all qubits have the same constant degree.
 
 Given a syndrome, $\synd$, define a ``bit-score vector", $\bitscorevec = H_X^T \synd$ where
 $\bitscorevec \in \Z^{\NQubits}$. 
@@ -38,7 +38,7 @@ as the number of qubits with an error in the neighborhood of $N_i$.
 Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
 correspond to $\generatorscorevec_i$. Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$.
 
-\newcommand{\SPr}{\half - \half\mleft(1-2p\mright)^\NTQ}
+\newcommand{\SPr}{\half - \half\mleft(1-2p\mright)^\DegStable}
 \begin{align*}
 	\Pr[S_i = 1] = \Pr\mleft[\texttt{$N_i$ is odd}\mright] = \SPr
 \end{align*}
@@ -56,7 +56,7 @@ $$
 $$
 So, 
 $$
-	\bitscoreRV_i \sim \texttt{Binom}(\NTS, \SPr).
+	\bitscoreRV_i \sim \texttt{Binom}(\DegBit, \SPr).
 $$
 
 And then,
@@ -69,7 +69,7 @@ $$
 
 So then,
 $$
-	\generatorscoreRV_k \sim \texttt{Binom}(\NTS \NTQ, \SPr).
+	\generatorscoreRV_k \sim \texttt{Binom}(\DegBit \DegStable, \SPr).
 $$
 
 The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
@@ -84,8 +84,8 @@ $$
 	\genscoreRVCorrected = \frac{\generatorscoreRV - \mu}{\sigma}
 $$
 
-\newcommand{\muexp}{\NTS \NTQ \mleft(\SPr\mright)}
-\newcommand{\sigmaexp}{ \sqrt{\NTS \NTQ (\SPr) (1 - (\SPr))}}
+\newcommand{\muexp}{\DegBit \DegStable \mleft(\SPr\mright)}
+\newcommand{\sigmaexp}{ \sqrt{\DegBit \DegStable (\SPr) (1 - (\SPr))}}
 where $\mu = \muexp$ and $\sigma = \sigmaexp$.
 
 For a standard Gaussian random variable, $Z$, we then know that by the BLANK BLANK BOUND TODO:,
@@ -98,14 +98,14 @@ where
 % TODO: NORMALIZE, put into appendix the proof
 $$
 	\beta =
-		\sum_{i=1}^{\NTS \NTQ} \E\mleft[|B'_i|^3\mright] \leq \frac{0.56}{\sqrt{\NTS \NTQ}}
+		\sum_{i=1}^{\DegBit \DegStable} \E\mleft[|B'_i|^3\mright] \leq \frac{0.56}{\sqrt{\DegBit \DegStable}}
 $$
 
-	% &\leq \sum_{i=1}^{\NTS \NTQ} \E\mleft[\mleft|\frac{1}{\sigma}\mright|^3\mright] \\
-	% &= \frac{\NTS \NTQ}{\sigmaexp^3}\\
-	% &= \frac{\NTS \NTQ}{
+	% &\leq \sum_{i=1}^{\DegBit \DegStable} \E\mleft[\mleft|\frac{1}{\sigma}\mright|^3\mright] \\
+	% &= \frac{\DegBit \DegStable}{\sigmaexp^3}\\
+	% &= \frac{\DegBit \DegStable}{
 	% 	\sqrt{
-	% 		\NTS \NTQ \mleft(\frac{1}{4} - \frac{\mleft(1-2p\mright)^\NTQ}{4}\mright)
+	% 		\DegBit \DegStable \mleft(\frac{1}{4} - \frac{\mleft(1-2p\mright)^\DegStable}{4}\mright)
 	% 	}
 	% }.
 % TODO: SMTHNG WRONG HERE
@@ -126,7 +126,7 @@ So then, if we solve for $u$ such that $O(\beta) + \frac{\phi(u)}{u} = \frac{i}{
 we can get a lower bound on $u$ for the expected value of the top $i$th sample.
 Using Sage, we get 
 $$
-\left[u = \frac{25 \, \sqrt{{\NTQ} {\NTS}} M e^{\left(-\frac{1}{2} \, u^{2}\right)}}{25 \, \sqrt{2} \sqrt{\pi} \sqrt{{NTQ} {NTS}} K - 14 \, \sqrt{2} \sqrt{\pi} M}\right]
+\left[u = \frac{25 \, \sqrt{{\DegStable} {\DegBit}} M e^{\left(-\frac{1}{2} \, u^{2}\right)}}{25 \, \sqrt{2} \sqrt{\pi} \sqrt{{NTQ} {NTS}} K - 14 \, \sqrt{2} \sqrt{\pi} M}\right]
 $$
 
 Then, get that $u >= SMTHNG $ or something for SMTHNG SMTHNG.
@@ -135,14 +135,14 @@ Then, get that $u >= SMTHNG $ or something for SMTHNG SMTHNG.
 % where $\genscoreRVCorrected$ is a random variable and $\genscoreRVCorrected \in Z$.
 
 % Note that due to the expander graph property, generator $k$ has at least 
-% $(1 - \delta)\NTQ$ unique stabilizer vertices in its neighborhood.
+% $(1 - \delta)\DegStable$ unique stabilizer vertices in its neighborhood.
 
 
 % STEPS:
 % \begin{align*}
 % 	\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] &=
 % 		\Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
-% 		&= \half + \half \mleft( 1 - 2p\mright)^\NTQ - q^\NTQ
+% 		&= \half + \half \mleft( 1 - 2p\mright)^\DegStable - q^\DegStable
 % \end{align*}
 
 % Then, assuming that $p < 0.5$, $\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] < \half$

@@ -30,4 +30,14 @@
 		\Return $\DeducedE$ if $|\sigma| = 0$, $\bot$ otherwise.
 \end{algorithm}
 
-\subsection{The Intuition}
+\subsection{A Moral Reason/ Intuition}
+The algorithm is essentially the same as Small Set Bit Flip [TODO: CITE] with a minor
+difference, only a constant number of generators are checked.
+The idea here is that given a syndrome $\sigma$ and a parity check matrix, $H_X$,
+the $i$th row of $H_X^T \sigma$ equals the number of error-ed checks that a
+qubit touches. Then, the $k$th row of $H_ZH_X^T\sigma$ is roughly correlated to
+the number of error-ed checks that the qubits in the $k$th generator touch.
+This rough correlation comes from the fact that we are working with expander codes.
+So then, if you get the generators touching the most error-ed stabilizers, 
+it would stand to reason that flipping some subset of qubits from a ``highly error-ed generator" would
+result in decreasing the syndrome.
