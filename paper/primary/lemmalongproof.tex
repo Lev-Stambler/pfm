@@ -45,10 +45,12 @@ $$
 	\Pr\mleft[\OptVarEqChangeable{G''} < \frac{1}{3}\mright] \geq \Pr\mleft[\OptVarEq < \frac{1}{3}\mright]
 $$
 % TODO: Urrrrrr not sure here
-if $\E[G''_{g_i}] \leq \E[\genscoreRVCorrected_{g_i}]$, 
+if $\E[G''_{g_i}] < TODO: the thing we want$ $\E[G''_{g_i}] \leq \E[\genscoreRVCorrected_{g_i}]$, 
 % TODO: variance?? ... todo: very very unsure about that there...
-$\Var[G''_{g_i}] \geq \Var[G'_{g_i}]$,
+$\frac{\Var[G''_{g_i}]}{\Var[G'_{g_i}]} \geq \frac{\E[G'_{g_i}]}{\E[G''_{g_i}]}$,
 TODO: AND ARE CALCULATED VIA CHEBYSHEVS INEQUALITY.
+TODO: the above comes from some magic having to do with Chebyshev's bounds and square root
+and the way we calculate thing huh. 
 
 We then know that $\E[\genscoreRVCorrected_{g_i}] \geq (1 - \delta)\E[\generatorscoreRV_{g_i}]$
 and that TODO: var.

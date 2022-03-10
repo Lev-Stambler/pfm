@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1646927821 "main.aux" "main.bbl" "main" 1646928345
+["bibtex main"] 1646927821 "main.aux" "main.bbl" "main" 1646929788
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1646928345 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
+  "main.aux" 1646929788 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
   "references.bib" 1646405059 917 dfc437031a233691152b0896409e2867 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1646928344 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1646928345
+["pdflatex"] 1646929787 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1646929788
   "/home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1646406364 6964 d538b4c5c37c562ac2f35852f5d4dbbf ""
   "/home/lev/code/research/pfm/paper/primary/main.tex" 1646924516 4836 f6ce468dfce651279583ac4becb5b138 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -72,6 +72,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm" 1229303445 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm" 1229303445 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb" 1248133631 32007 e8fa0078355f39467039935974716569 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1248133631 37912 77d683123f92148345f3fc36a38d9ab1 ""
@@ -81,6 +82,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1248133631 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb" 1248133631 39386 0bb525d495ceab21fe797301a586e0d7 ""
@@ -225,11 +227,11 @@
   "/usr/local/texlive/2021/texmf.cnf" 1642605535 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "CustomCommands.sty" 1646923585 8391 009adce611ce2949d6509739544f73c5 ""
   "PRIMEarxiv.sty" 1646406960 7735 534e50c649b95e8b8e697fb445f66f35 ""
-  "lemmalongproof.tex" 1646928343 3295 e1f5b32ab6676eb426374c86a54ea10e ""
-  "main.aux" 1646928345 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
+  "lemmalongproof.tex" 1646929786 3508 7a07c1a3060367d4e662a7f333acb2dc ""
+  "main.aux" 1646929788 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
   "main.bbl" 1646927821 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
-  "main.brf" 1646928345 107 f5ed18da54ff44dc792d62694133dc95 "pdflatex"
-  "main.out" 1646928345 2479 3132298ac9d99c6e265673ab7180be27 "pdflatex"
+  "main.brf" 1646929788 107 f5ed18da54ff44dc792d62694133dc95 "pdflatex"
+  "main.out" 1646929788 2479 3132298ac9d99c6e265673ab7180be27 "pdflatex"
   "main.tex" 1646924516 4836 f6ce468dfce651279583ac4becb5b138 ""
   "section-algorithm.tex" 1646859430 2008 f6da425044666cc67977d4c7d415c312 ""
   "section-analysis.tex" 1646925687 8029 fda1d9e6cf11fce9c5f2e872ac580f81 ""
