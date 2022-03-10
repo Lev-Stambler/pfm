@@ -1,0 +1,79 @@
+\newcommand{\orderpinner}{\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}}
+
+First, to just restate the lemma.
+% TODO: new command for lemma
+We claim the following holds for an $i \in [K]$ and for $p_S = \Pr[S_j = 1]$ for any stabilizer $j$
+	
+\begin{align*}
+	&\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] \\
+	\leq &\sum_{e = 0}^{\DegBit - 1} 
+			\OrderP\mleft(\orderpinner\mright) \cdot \Pr[E_{g_i} = e] 
+			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[E_{g_i} = e]
+\end{align*}
+where
+$$
+	\OrderP(n, p, i, v) = \Pr\mleft[v < (1 - \delta) W_i \mright]
+$$
+and $W_i$ is the $i$th largest order statistic from $M$ samples of $\texttt{Binomial}(n, p)$.
+
+
+First, because $0 \leq E_{g_i} \leq \Gamma(\texttt{generator i}) \leq \DegBit \DegStable$, 
+\begin{align*}
+\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] &= 
+	\sum_{e = 0}^{\DegBit \DegStable} 
+		\Pr\mleft[\frac{\DegBit(G'_{g_i} - e)}{(1 - \delta)(G'_{g_i} + e)} < \frac{1}{3} \mright] \Pr\mleft[E_{g_i} = e\mright]\\
+&\leq
+	\sum_{e = 0}^{\DegBit - 1} 
+		\Pr\mleft[\frac{\DegBit(G'_{g_i} - e)}{(1 - \delta)(G'_{g_i} + e)} < \frac{1}{3} \mright] \Pr\mleft[E_{g_i} = e\mright]
+	+ \sum_{e = \DegBit}^{\DegBit \DegStable} 1 \cdot \Pr\mleft[E_{g_i} = e\mright]\\
+&=
+	\sum_{e = 0}^{\DegBit - 1} 
+		\Pr\mleft[G'_{g_i} < \frac{(3 \DegBit + 1 - \delta) e}{3 \DegBit - 1 + \delta} \mright] \Pr\mleft[E_{g_i} = e\mright]
+	+ \sum_{e = \DegBit}^{\DegBit \DegStable} 1 \cdot \Pr\mleft[E_{g_i} = e\mright].\\
+\end{align*}
+
+So then, for a given $e$,
+we just need to show that
+\begin{align*}
+	\Pr\mleft[G'_{g_i} < \frac{(3 \DegBit + 1 - \delta) e}{3 \DegBit - 1 + \delta} \mright] 
+&\leq
+	\OrderP\mleft(\orderpinner\mright).
+\end{align*}
+
+Then, also observe that, for a fixed $\lyingGenerator_{g_k}j$, 
+$$
+	\Pr\mleft[\OptVarEqChangeable{G''} < \frac{1}{3}\mright] \geq \Pr\mleft[\OptVarEq < \frac{1}{3}\mright]
+$$
+% TODO: Urrrrrr not sure here
+if $\E[G''_{g_i}] \leq \E[\genscoreRVCorrected_{g_i}]$, 
+% TODO: variance?? ... todo: very very unsure about that there...
+$\Var[G''_{g_i}] \geq \Var[G'_{g_i}]$,
+TODO: AND ARE CALCULATED VIA CHEBYSHEVS INEQUALITY.
+
+We then know that $\E[\genscoreRVCorrected_{g_i}] \geq (1 - \delta)\E[\generatorscoreRV_{g_i}]$
+and that TODO: var.
+And we also know that $\generatorscoreRV_{g_i}$ is the $i$th largest of $M$ samples from
+$\texttt{Binomial}(\DegStable \DegBit, p_S)$. 
+If $E_{g_i} = e$, we also know that for some $s_1, s_2, ..., s_e \in \aleph$, $S_{s_j} = 0$ for $j \in [e]$.
+
+So then, given $e$, $G_{g_i}$ is the $i$th largest sample of $M$ from $\texttt{Binomial}(\DegStable \DegBit - c\DegStable e, p_S)$
+for some $0 < c \leq 1$.
+This is true because each stabilizer, $s_j$, that must be 0 neighbors at most $\DegStable$ bits
+in generator $g_i$ and neighbors at least one bit in $g_i$.
+
+So then, we can see that
+$$
+	\E\mleft[(1 - \delta) G_{g_i} \mid \lyingGenerator_{g_i} = e\mright] \geq \E\mleft[(1 - \delta) G''_{k_i}\mright]
+$$
+where 
+$$
+	G'' \sim \texttt{Binomial}(\DegStable \DegBit - \DegStable e, p_S)
+$$
+and $k_1, k_2, ..., k_K$ are the order statistics with $G''_{k_1} \geq G''_{k_2} \geq ... \geq G''_{k_K}$.
+Finally, because 
+$$
+\Pr\mleft[\OptVarEqChangeable{G''} < \frac{1}{3} \mid E_{g_i} = e\mright] = 
+	\OrderP\mleft(\orderpinner\mright)
+$$
+the lemma holds.
+

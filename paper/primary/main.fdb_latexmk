@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1646924436 "main.aux" "main.bbl" "main" 1646924518
+["bibtex main"] 1646927821 "main.aux" "main.bbl" "main" 1646928345
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1646924518 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
+  "main.aux" 1646928345 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
   "references.bib" 1646405059 917 dfc437031a233691152b0896409e2867 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1646924517 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1646924518
+["pdflatex"] 1646928344 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1646928345
   "/home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1646406364 6964 d538b4c5c37c562ac2f35852f5d4dbbf ""
   "/home/lev/code/research/pfm/paper/primary/main.tex" 1646924516 4836 f6ce468dfce651279583ac4becb5b138 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -225,14 +225,14 @@
   "/usr/local/texlive/2021/texmf.cnf" 1642605535 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "CustomCommands.sty" 1646923585 8391 009adce611ce2949d6509739544f73c5 ""
   "PRIMEarxiv.sty" 1646406960 7735 534e50c649b95e8b8e697fb445f66f35 ""
-  "lemmalongproof.tex" 1646924515 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "main.aux" 1646924518 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
-  "main.bbl" 1646924436 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
-  "main.brf" 1646924518 107 f5ed18da54ff44dc792d62694133dc95 "pdflatex"
-  "main.out" 1646924518 2479 3132298ac9d99c6e265673ab7180be27 "pdflatex"
+  "lemmalongproof.tex" 1646928343 3295 e1f5b32ab6676eb426374c86a54ea10e ""
+  "main.aux" 1646928345 6128 f3b44d7c0d7c2ff820482ba78f116929 "pdflatex"
+  "main.bbl" 1646927821 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
+  "main.brf" 1646928345 107 f5ed18da54ff44dc792d62694133dc95 "pdflatex"
+  "main.out" 1646928345 2479 3132298ac9d99c6e265673ab7180be27 "pdflatex"
   "main.tex" 1646924516 4836 f6ce468dfce651279583ac4becb5b138 ""
   "section-algorithm.tex" 1646859430 2008 f6da425044666cc67977d4c7d415c312 ""
-  "section-analysis.tex" 1646924240 7988 6a534ed1c620ad57bc1b40244d1a5d47 ""
+  "section-analysis.tex" 1646925687 8029 fda1d9e6cf11fce9c5f2e872ac580f81 ""
   (generated)
   "main.aux"
   "main.brf"

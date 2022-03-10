@@ -165,11 +165,12 @@ $$
 $$
 
 \newcommand{\OptVarRV}{Q}
-\newcommand{\OptVarEq}{
+\newcommand{\OptVarEqChangeable}[1]{
 \frac
-			{\DegBit \mleft(\genscoreRVCorrected_{g_i} - \lyingGenerator_{g_i}\mright)}
-			{(1 - \delta)(\genscoreRVCorrected_{g_i} + \lyingGenerator_{g_k})}
+			{\DegBit \mleft(#1{g_i} - \lyingGenerator_{g_i}\mright)}
+			{(1 - \delta)(#1{g_i} + \lyingGenerator_{g_k})}
 }
+\newcommand{\OptVarEq}{\OptVarEqChangeable{\genscoreRVCorrected}}
 
 \begin{lemma}{We claim the following holds for an $i \in [K]$ and for $p_S = \Pr[S_j = 1]$ for any stabilizer $j$}
 	
