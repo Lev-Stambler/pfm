@@ -1,0 +1,173 @@
+\newcommand{\orderpinner}{\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}}
+\newcommand{\desiredGPrimeUpperBound}{\frac{(3 \DegBit + 1 - \delta) e}{3 \DegBit - 1 + \delta}}
+\newcommand{\generatorscoreRVGivenE}{G^e}
+
+First, to just restate the lemma.
+% TODO: new command for lemma
+We claim the following holds for an $i \in [K]$ and for $p_S = \Pr[S_j = 1]$ for any stabilizer $j$
+	
+\begin{align*}
+	&\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] \\
+	\leq &\sum_{e = 0}^{\DegBit - 1} 
+			\OrderP\mleft(\orderpinner\mright) \cdot \Pr[\lyingGenerator_{\OrderStatDenomi} = e] 
+			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[\lyingGenerator_{\OrderStatDenomi} = e]
+\end{align*}
+where
+$$
+	\OrderP(n, p, i, v) = \Pr\mleft[v < (1 - \delta) W_i \mright]
+$$
+and $W_i$ is the $i$th largest order statistic from $M$ samples of $\texttt{Binomial}(n, p)$.
+
+
+First, because $0 \leq \lyingGenerator_{\OrderStatDenomi} \leq \Gamma(\texttt{generator i}) \leq \DegBit \DegStable$, 
+\begin{align*}
+\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] &= 
+	\sum_{e = 0}^{\DegBit \DegStable} 
+		\Pr\mleft[\frac{\DegBit(\genscoreRVCorrected_{\OrderStatDenomi} - e)}{(1 - \delta)(\genscoreRVCorrected_{\OrderStatDenomi} + e)} < \frac{1}{3} \mright] \Pr\mleft[\lyingGenerator_{\OrderStatDenomi} = e\mright]\\
+&\leq
+	\sum_{e = 0}^{\DegBit - 1} 
+		\Pr\mleft[\frac{\DegBit(\genscoreRVCorrected_{\OrderStatDenomi} - e)}{(1 - \delta)(\genscoreRVCorrected_{\OrderStatDenomi} + e)} < \frac{1}{3} \mright] \Pr\mleft[\lyingGenerator_{\OrderStatDenomi} = e\mright]
+	+ \sum_{e = \DegBit}^{\DegBit \DegStable} 1 \cdot \Pr\mleft[E_{\OrderStatDenomi} = e\mright]\\
+&=
+	\sum_{e = 0}^{\DegBit - 1} 
+		\Pr\mleft[\genscoreRVCorrected_{\OrderStatDenomi} < \frac{(3 \DegBit + 1 - \delta) e}{3 \DegBit - 1 + \delta} \mright] \Pr\mleft[E_{\OrderStatDenomi} = e\mright]
+	+ \sum_{e = \DegBit}^{\DegBit \DegStable} 1 \cdot \Pr\mleft[\lyingGenerator_{\OrderStatDenomi} = e\mright].\\
+\end{align*}
+
+So then, for a given $e$,
+we just need to find an upper bound for
+\begin{align*}
+	\Pr\mleft[\genscoreRVCorrected_{\OrderStatDenomi} < \desiredGPrimeUpperBound \mright].
+\end{align*}
+
+We can then use Chebyshev inequality to get an upper bound of
+$$
+	\min\mleft(\frac{\Var[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e]}
+		{\mleft[\E[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e] - \frac{1}{3}]\mright]^2}, 1\mright)
+$$
+if $\E[\genscoreRVCorrected_{\OrderStatDenomi}] > \frac{1}{3}$ and an upper bound of $1$ otherwise.
+
+Then, we need to related $\genscoreRVCorrected_{\OrderStatDenomi}$ to $\generatorscoreRV_{\OrderStatDenomi}$ as our algorithm
+only know $\generatorscoreRV_{\OrderStatDenomi}$.
+
+\begin{lemma}{$\E[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e] \geq \E[\generatorscoreRV_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e] \cdot \mleft(1 - \frac{\DegStable - 1}{N}\mright)$}
+\begin{proof}
+	Fix $\lyingGenerator_{\OrderStatDenomi} = e$. Then, let $\alpha = \generatorscoreRV_{\OrderStatDenomi}$ and $\aleph = \set{j \in [M] : \syndromeRV = 1}$. 
+	Note that $\genscoreRVCorrected_{\OrderStatDenomi} = |\aleph|$ by definition of $\genscoreRVCorrected_{\OrderStatDenomi}$.
+	We then know that $\alpha \geq |\aleph|$ because $\alpha$ counts each stabilizer
+	in $s \in \Gamma(\texttt{generator i})$ where $\syndromeRV_s = 1$ at least once.
+	For $s \in \aleph$, let
+	$$
+		O_s = |\set{k : k \in \texttt{generator }i\; \wedge s \in \Gamma(\texttt{bit k})}| - 1.
+	$$
+	In other words, $O_s$ is the number of times a stabilizer in the neighborhood of a generator is
+	``over-counted" in $\alpha$. Then, % TODO: better define over coutned
+	$
+		|\aleph| = \alpha - \sum_{s \in \aleph}O_s
+	$ because we are subtracting the total number of ``over-counted" stabilizers.
+	Then, note that
+	\begin{align*}
+		\E[O_s] &= \sum_{b \in \Gamma(s)} \Pr[b \in \texttt{generator i}] - 1\\
+			&= 1 + \sum_{b \in \Gamma(s) \setminus t} \Pr[b \in \texttt{generator i}] - 1 \tag{at least $1$ $t \in \Gamma(s)$ must be in $\texttt{generator i}$ } \\
+			&= \mleft(\DegStable - 1\mright) \frac{1}{N}
+	\end{align*}
+	for some $s \in \aleph$ and $t \in \Gamma(s)$ .
+	So then, 
+	\begin{align*}
+		\E[|\aleph|] &= \E[\alpha] - \sum_{s \in \aleph}\E[O_s] \\
+		&\geq \E[\alpha] - \E[|\aleph|] \E_{s \in \aleph}[O_s] \\
+		&\geq \E[\alpha] - \E[\alpha] \E_{s \in \aleph}[O_s] \\
+		&\geq \E[\alpha] \mleft(1 - \frac{\DegStable - 1}{N}\mright).
+	\end{align*}
+\end{proof}	
+\end{lemma}
+
+So then, lets define 
+$$
+	\generatorscoreRVGivenE \sim \texttt{Binomial}(\DegStable \DegBit - \DegStable e, p_S)
+$$
+and, for $i \in [K]$, $\generatorscoreRVGivenE_{k_i}$ to be the top $i$th order statistic from $M$ samples.
+
+\begin{lemma}{$\E[\generatorscoreRV_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e] \geq \E[\generatorscoreRVGivenE_{k_i}]$}
+\begin{proof}
+	If $E_{\OrderStatDenomi} = e$, we also know that for some $s_1, s_2, ..., s_e \in \aleph$, $S_{s_j} = 0$ for $j \in [e]$.
+	So then, given $e$, $\generatorscoreRV_{\OrderStatDenomi}$ is the $i$th largest sample of $M$ from $\texttt{Binomial}(\DegStable \DegBit - c\DegStable e, p_S)$
+	for some $0 < c \leq 1$.
+	This is true because each stabilizer, $s_j$, that must be 0 neighbors at most $\DegStable$ bits
+	in generator $i$ and neighbors at least one bit in generator $i$.
+\end{proof}	
+\end{lemma}
+
+\begin{lemma}{$\Var[\generatorscoreRV_{\OrderStatDenomi}] \geq \Var[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e]$}
+\begin{proof}
+	First, we need to show that 
+	$\Var[\generatorscoreRV_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi}] \geq \Var[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e]$.
+	This can be seen easily because 
+	$$
+		\Var[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi}] =
+			\E[\mleft(\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi}\mright)^2] - \E[\genscoreRVCorrected_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi}]^2
+	$$
+	% Urrrr... better yet, could we 
+	% Urrrrr.... nevermind, well fak me (maybe we gotta involve the whole minus O_s thingy. Or maybe not,
+	% maybe we just introduce a D variable which equals G'_gi - G_gi 
+\end{proof}	
+\end{lemma}
+
+\newcommand{\chebyshevFinalBound}{
+	\min\mleft(\frac{\Var[\generatorscoreRV_{\OrderStatDenomi}]}
+		{\mleft[\E[\generatorscoreRVGivenE_{k_i}] - \frac{1}{3}\mright]^2}, 1\mright)
+}
+Finally, we get that 
+\begin{align*}
+	\Pr\mleft[\genscoreRVCorrected_{\OrderStatDenomi} < \desiredGPrimeUpperBound \mright] \leq \chebyshevFinalBound
+\end{align*}
+and that
+$$
+	\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] = 
+	\sum_{e = 0}^{\DegBit - 1} 
+		\chebyshevFinalBound \Pr\mleft[E_{\OrderStatDenomi} = e\mright]
+	+ \sum_{e = \DegBit}^{\DegBit \DegStable} 1 \cdot \Pr\mleft[\lyingGenerator_{\OrderStatDenomi} = e\mright].
+$$
+
+
+\newpage
+
+Then, also observe that, for a fixed $\lyingGenerator_{g_k}j$, 
+$$
+	\Pr\mleft[\OptVarEqChangeable{G''} < \frac{1}{3}\mright] \geq \Pr\mleft[\OptVarEq < \frac{1}{3}\mright]
+$$
+% TODO: Urrrrrr not sure here
+if $\E[G''_{\OrderStatDenomi}] < TODO: the thing we want$ $\E[G''_{\OrderStatDenomi}] \leq \E[\genscoreRVCorrected_{\OrderStatDenomi}]$, 
+% TODO: variance?? ... todo: very very unsure about that there...
+$\frac{\Var[G''_{\OrderStatDenomi}]}{\Var[G'_{\OrderStatDenomi}]} \geq \frac{\E[G'_{\OrderStatDenomi}]}{\E[G''_{\OrderStatDenomi}]}$,
+TODO: AND ARE CALCULATED VIA CHEBYSHEVS INEQUALITY.
+TODO: the above comes from some magic having to do with Chebyshev's bounds and square root
+and the way we calculate thing huh. 
+
+We then know that $\E[\genscoreRVCorrected_{\OrderStatDenomi}] \geq (1 - \delta)\E[\generatorscoreRV_{\OrderStatDenomi}]$
+and that TODO: var.
+And we also know that $\generatorscoreRV_{\OrderStatDenomi}$ is the $i$th largest of $M$ samples from
+$\texttt{Binomial}(\DegStable \DegBit, p_S)$. 
+If $E_{\OrderStatDenomi} = e$, we also know that for some $s_1, s_2, ..., s_e \in \aleph$, $S_{s_j} = 0$ for $j \in [e]$.
+
+So then, given $e$, $G_{\OrderStatDenomi}$ is the $i$th largest sample of $M$ from $\texttt{Binomial}(\DegStable \DegBit - c\DegStable e, p_S)$
+for some $0 < c \leq 1$.
+This is true because each stabilizer, $s_j$, that must be 0 neighbors at most $\DegStable$ bits
+in generator $\OrderStatDenomi$ and neighbors at least one bit in $\OrderStatDenomi$.
+
+So then, we can see that
+$$
+	\E\mleft[(1 - \delta) G_{\OrderStatDenomi} \mid \lyingGenerator_{\OrderStatDenomi} = e\mright] \geq \E\mleft[(1 - \delta) G''_{k_i}\mright]
+$$
+where 
+$$
+	G'' \sim \texttt{Binomial}(\DegStable \DegBit - \DegStable e, p_S)
+$$
+and $k_1, k_2, ..., k_K$ are the order statistics with $G''_{k_1} \geq G''_{k_2} \geq ... \geq G''_{k_K}$.
+Finally, because 
+$$
+\Pr\mleft[\OptVarEqChangeable{G''} < \frac{1}{3} \mid E_{\OrderStatDenomi} = e\mright] = 
+	\OrderP\mleft(\orderpinner\mright)
+$$
+the lemma holds.
+

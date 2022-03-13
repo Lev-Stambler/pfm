@@ -115,7 +115,7 @@ The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
 gets the $K$ generators, indexed by $g_1, g_2, ..., g_K$, with the top values
 of $\generatorscorevec_i$ for $i \in [\NStables]$. WLOG, assume
 $\generatorscorevec_{g_1} \geq \generatorscorevec_{g_2} \geq ... \geq \generatorscorevec_{g_K}$.
-Then, we can think of $\E[\generatorscoreRV_{g_i}]$ as the expected value of the $i$th
+Then, we can think of $\E[\generatorscoreRV_{\OrderStatDenomi}]$ as the expected value of the $i$th
 top sample from $\NStables$ samples of the distribution defining $\generatorscoreRV_i$.
 
 Let random variable $\genscoreRVCorrected_k$ then equal
@@ -167,8 +167,8 @@ $$
 \newcommand{\OptVarRV}{Q}
 \newcommand{\OptVarEqChangeable}[1]{
 \frac
-			{\DegBit \mleft(#1{g_i} - \lyingGenerator_{g_i}\mright)}
-			{(1 - \delta)(#1{g_i} + \lyingGenerator_{g_k})}
+			{\DegBit \mleft(#1_{\OrderStatDenomi} - \lyingGenerator_{\OrderStatDenomi}\mright)}
+			{(1 - \delta)(#1_{\OrderStatDenomi} + \lyingGenerator_{g_k})}
 }
 \newcommand{\OptVarEq}{\OptVarEqChangeable{\genscoreRVCorrected}}
 
@@ -177,8 +177,8 @@ $$
 \begin{align*}
 	&\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] \\
 	\leq &\sum_{e = 0}^{\DegBit - 1} 
-			\OrderP\mleft(\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}\mright) \cdot \Pr[E_{g_i} = e] 
-			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[E_{g_i} = e]
+			\OrderP\mleft(\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}\mright) \cdot \Pr[E_{\OrderStatDenomi} = e] 
+			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[E_{\OrderStatDenomi} = e]
 \end{align*}
 where
 $$

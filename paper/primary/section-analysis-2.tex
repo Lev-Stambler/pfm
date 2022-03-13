@@ -80,7 +80,7 @@ The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
 gets the $K$ generators, indexed by $g_1, g_2, ..., g_K$, with the top values
 of $\generatorscorevec_i$ for $i \in [\NStables]$. WLOG, assume
 $\generatorscorevec_{g_1} \geq \generatorscorevec_{g_2} \geq ... \geq \generatorscorevec_{g_K}$.
-Then, we can think of $\E[\generatorscoreRV_{g_i}]$ as the expected value of the $i$th
+Then, we can think of $\E[\generatorscoreRV_{\OrderStatDenomi}]$ as the expected value of the $i$th
 top sample from $\NStables$ samples of the distribution defining $\generatorscoreRV_i$.
 
 Let random variable $\genscoreRVCorrected_k$ then equal
@@ -229,8 +229,8 @@ $$
 \newcommand{\OptVarRV}{Q}
 \newcommand{\OptVarEq}{
 \frac
-			{\DegBit \mleft(\genscoreRVCorrected_{g_i} - \lyingGenerator_{g_i}\mright)}
-			{(1 - \delta)(\genscoreRVCorrected_{g_i} + \lyingGenerator_{g_k})}
+			{\DegBit \mleft(\genscoreRVCorrected_{\OrderStatDenomi} - \lyingGenerator_{\OrderStatDenomi}\mright)}
+			{(1 - \delta)(\genscoreRVCorrected_{\OrderStatDenomi} + \lyingGenerator_{g_k})}
 }
 So then, \begin{align*}
 	\Pr\mleft[\texttt{loop cannot find a correcting error}\mright] &\leq
