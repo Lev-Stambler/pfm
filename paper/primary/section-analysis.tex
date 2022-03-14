@@ -1,9 +1,87 @@
+\newcommand{\lyingIndividual}{{L_j}}
+\newcommand{\generatorScoreRV}{{G'_i}}
+\newcommand{\lyingGenerator}{{E_i}}
+\newcommand{\lyingGeneratorScore}{{E'_i}}
+\newcommand{\sortIndex}{g_i}
+\newcommand{\generatorScoreRVSorted}{{G'_{\sortIndex}}}
+\newcommand{\syndromeRV}{S_j}
+\newcommand{\generatorScoreOrderStat}{{G'_{(M - i)}}}
+\newcommand{\generatorFlaggedStab}{{G_i}}
+\newcommand{\generatorStabNeighbors}{{\aleph_i}}
+\newcommand{\overcountGenerator}{\mathcal{O}^G_i}
+\newcommand{\overcountError}{\mathcal{O}^E_i}
+
+\subsection*{Definitions}
+Let us start by defining a slew of random variables
+\begin{itemize}
+	\item Let $\syndromeRV = 1$ if and only if $\vecSigma_j = 1$ and 0 otherwise.
+	\item Let $\lyingIndividual = 1$ iff $\syndromeRV = 0 \wedge \exists k \in \Gamma(\text{stabilizer }j)$ 
+	such that $\vecError_k = 1$ and 0 otherwise. In other words, think of $\lyingIndividual$ as indicating whether
+	stabilizer $\lyingIndividual$ is ``lying" about not neighboring an error-ed bit.
+	\item Let $\generatorStabNeighbors$ be the number of unique stabilizers in the neighborhood of a generator. More formally,
+	$$
+		\generatorStabNeighbors = \bigcup_{k \in \matrixGenerator_i} \Gamma(k).
+	$$
+	\item Let $\generatorFlaggedStab$ be the number of stabilizers in the neighborhood of a generator such 
+	that the stabilizer is flagged. More formally,
+	$$
+		\generatorFlaggedStab = \sum_{j \in \generatorStabNeighbors} S_j
+	$$
+	\item Let $\generatorScoreRV$ be $T_i$ in the algorithm. Note that $\generatorScoreRV$ equals TODO: reference here
+		$$
+			\generatorScoreRV = \sum_{k \in \matrixGenerator_i} \sum_{j \in \Gamma(k)} \syndromeRV 
+		$$
+	\item Define $\lyingGenerator$ to be the number of ``lying" stabilizers in $\aleph$, or,
+	$$
+		\lyingGenerator = \sum_{j \in \generatorStabNeighbors} L_j
+	$$
+	\item $\lyingGeneratorScore$ be equal to the sum of the number of neighboring ``lying" stabilizers of each bit in generator $i$.
+	Specifically,
+	$$
+		\lyingGeneratorScore = \sum_{k \in \matrixGenerator_i} \sum_{j \in \Gamma(k)} \lyingIndividual
+	$$
+	% \item g_1, g_2, ...., g_K relates to order g_1 = index of generator row where G'_g_i > ...
+	% Then relate to order stat...
+	% \item ORDERSTAT  ?? (think about)
+	\item Define $\overcountGenerator = \generatorScoreRV - \generatorFlaggedStab$. $\overcountGenerator$ can be thought of as the
+	number of ``over-counted" flagged stabilizers which contribute to $\generatorScoreRV$.
+	\item Define $\overcountError = \lyingGeneratorScore - \lyingGenerator$. $\overcountError$ can be thought of as the
+	number of ``over-counted" lying stabilizers which contribute to $\lyingGeneratorScore$.
+\end{itemize}
+
+\subsection*{Distributions on the random variables}
+
+\subsection*{Observations and Lemmas}
+
+
+\begin{lemma}{For a generator, given $\lyingGenerator$ and $\generatorFlaggedStab$,
+	we can find some correction vector $\correctionvec \in \F_2^\NQubits$
+	such that \linebreak $\OptNumerator \geq \generatorFlaggedStab - \lyingGenerator$}
+	and $|k| \leq \frac{1-\delta}{\DegBit} (\generatorFlaggedStab + \lyingGenerator)$ for $\generatorFlaggedStab > \lyingGenerator$.
+\label{lemma:decrby}
+	\begin{proof}
+		TODO:	 part 1 is that there are 3 types of stabilizers in neighbourhood.
+		Those from G', those from E, and those in neither. If those in neither, there is no
+		neighbourhood in their error, so you can leave those bits alone. Then, by flipping bits
+		connected to G' you decrease syndrome by G', but you add in at most E'
+		
+		part 2: each flipping bit effects at least (1-delta) $\DegBit$stables
+	\end{proof}
+\end{lemma}
+
+
+
+\subsection*{Probability of single generator error}
+
+\subsection*{Probability of error}
+
+\subsection*{Error Probability Graphs}
+
+
+\newpage
 % \newcommand{\bitscorevec}{\boldsymbol{b}}
-% \newcommand{\lyingIndividual}{L}
-% \newcommand{\lyingGenerator}{E}
 % \newcommand{\genscoreRVCorrected}{G}
 % \newcommand{\bitscoreRV}{B}
-% \newcommand{\syndromeRV}{S}
 % \newcommand{\generatorscorevec}{\boldsymbol{g}}
 % \newcommand{\generatorscoreRV}{G'}
 % \newcommand{\synd}{\boldsymbol{\boldsymbol{\sigma_X}}}

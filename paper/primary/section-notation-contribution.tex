@@ -1,6 +1,6 @@
-\newcommand{\vecError}{\boldsymbol{e}_Z}
-\newcommand{\vecSigma}{\boldsymbol{\sigma}_Z}
-\newcommand{\matrixGenerator}{H_X}
+\newcommand{\vecError}{{\boldsymbol{e}_Z}}
+\newcommand{\vecSigma}{{\boldsymbol{\sigma}_Z}}
+\newcommand{\matrixGenerator}{{H_X}}
 \newcommand{\matrixParity}{H_Z}
 \newcommand{\codeZ}{\mathcal{C}_Z}
 \newcommand{\codeX}{\mathcal{C}_X}
@@ -8,8 +8,8 @@
 \newcommand{\NStablizer}{M}
 \newcommand{\NBits}{N}
 \newcommand{\MatrixField}{F_2^{\NStablizer \times \NBits}}
-\newcommand{\RegularBit}{\Delta_{B}}
-\newcommand{\RegularStab}{\Delta_{S}}
+\newcommand{\DegBit}{\Delta_{B}}
+\newcommand{\DegStab}{\Delta_{S}}
 
 \subsection*{Definitions and assumptions}
 
@@ -24,18 +24,11 @@
 		This results from when $H_Z$ and $H_X$ have the same number of rows.
 	\item Let $\NBits$ be the number of bits.
 	\item Assume $\matrixGenerator$ is the adjacency matrix of a $\leftExpander$ bipartite graph where $A$ is the set of bits
-		and $B$ is the set of stabilizers. Assume the graph is $\RegularBit, \RegularStab$ regular.
+		and $B$ is the set of stabilizers. Assume the graph is $\DegBit, \DegStab$ regular.
 \end{itemize}
 
 For the rest of the paper, we will only consider $Z$ errors. The algorithm and analysis remain the same 
 if considering $X$ errors, but $H_Z$ must be used as the generator matrix and $H_X$ must be used as the parity check matrix.
 
-- Note, 
-- error vec $\bm{e}$, syndrome vec $\bm{\sigma}$,
-- Let there be $M$ stabilizers and consequently $M$ generators
-- Let there be $N$ bits
-- Let $H_X$, $H_Z$
-- The rest of the paper will assume that we are only dealing with generator matric $H_X$, $Z$ errors, parity check matric $H_z$ and syndrome $\sigma_Z$
-- Let the code be formed by $(\delta, \gamma)$ left, bipartite, expander code with regularity where the left is $B$ (for bits) and right is $S$ (for stabilizer). Let it be $\Delta_B, \Delta_S$ regular
-
 \subsection*{Notation}
+% TODO: see Roam

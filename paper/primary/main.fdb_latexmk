@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1647283653 "main.aux" "main.bbl" "main" 1647283655
+["bibtex main"] 1647286978 "main.aux" "main.bbl" "main" 1647287059
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1647283655 5776 6d2a81569e858593f34c9fa8e77c683b "pdflatex"
+  "main.aux" 1647287059 6078 f27e693ec2e323dc10c1928f19eff437 "pdflatex"
   "references.bib" 1646405059 917 dfc437031a233691152b0896409e2867 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1647283653 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1647283655
+["pdflatex"] 1647287058 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1647287059
   "/home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1646406364 6964 d538b4c5c37c562ac2f35852f5d4dbbf ""
   "/home/lev/code/research/pfm/paper/primary/main.tex" 1647282365 4915 256cf38540d7b905685d1d6d0bfec36a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -218,16 +218,16 @@
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1642605583 2796620 8a1a95f7408ee5fc56f565bc9a0ba6f6 ""
   "/usr/local/texlive/2021/texmf.cnf" 1642605535 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "CustomCommands.sty" 1647282725 7731 59a9f7e2bd5cfae24715a8f3d20c4ebc ""
-  "PFM.sty" 1647282722 752 ca212bb98f33814a345cdf37d0b36c14 ""
+  "PFM.sty" 1647287055 749 605d3ba3a39bbe766d6888134b5aa406 ""
   "PRIMEarxiv.sty" 1646406960 7735 534e50c649b95e8b8e697fb445f66f35 ""
-  "main.aux" 1647283655 5776 6d2a81569e858593f34c9fa8e77c683b "pdflatex"
-  "main.bbl" 1647283653 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
-  "main.brf" 1647283655 111 2b115b7a5c8c202a9fe040135b33bcb2 "pdflatex"
-  "main.out" 1647283655 2617 dee1a568a49fc9f13f48f438336571d5 "pdflatex"
+  "main.aux" 1647287059 6078 f27e693ec2e323dc10c1928f19eff437 "pdflatex"
+  "main.bbl" 1647286978 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
+  "main.brf" 1647287059 111 4dcf3c8a3e3318b294faaebbdb84890a "pdflatex"
+  "main.out" 1647287059 2617 dee1a568a49fc9f13f48f438336571d5 "pdflatex"
   "main.tex" 1647282365 4915 256cf38540d7b905685d1d6d0bfec36a ""
   "section-algorithm.tex" 1646859430 2008 f6da425044666cc67977d4c7d415c312 ""
-  "section-analysis.tex" 1647282081 8443 72fabef8a97f17f5e6fa2b52fd13e3d0 ""
-  "section-notation-contribution.tex" 1647283651 2330 789b62d8cef225a9f1d84ae7e57fa575 ""
+  "section-analysis.tex" 1647287058 12052 10f11f1f10b46efb137a1742f263e718 ""
+  "section-notation-contribution.tex" 1647286945 1818 4b594403345c0c306afe850844007669 ""
   (generated)
   "main.aux"
   "main.brf"
