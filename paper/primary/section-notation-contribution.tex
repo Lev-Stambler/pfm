@@ -1,0 +1,41 @@
+\newcommand{\vecError}{\boldsymbol{e}_Z}
+\newcommand{\vecSigma}{\boldsymbol{\sigma}_Z}
+\newcommand{\matrixGenerator}{H_X}
+\newcommand{\matrixParity}{H_Z}
+\newcommand{\codeZ}{\mathcal{C}_Z}
+\newcommand{\codeX}{\mathcal{C}_X}
+\newcommand{\leftExpander}{(\delta, \gamma)\texttt{-left-expander}}
+\newcommand{\NStablizer}{M}
+\newcommand{\NBits}{N}
+\newcommand{\MatrixField}{F_2^{\NStablizer \times \NBits}}
+\newcommand{\RegularBit}{\Delta_{B}}
+\newcommand{\RegularStab}{\Delta_{S}}
+
+\subsection*{Definitions and assumptions}
+
+\begin{itemize}
+	\item We will use $j$ when referring to a stabilizer, $i$ when referring to a generator, $k$ when referring to a bit
+	\item We take $\vecError$ to be the error vector
+	\item We take $\vecSigma$
+	\item Let $\codeZ$ be a code which can correct $Z$ errors and $\codeX$ be a code a which can correct $X$ errors.
+	\item Let $H_X \in \MatrixField$ be the parity check matrix for $\codeX$ as well as the generator for $\codeZ$. 
+	\item Let $H_Z \in \MatrixField$ be the parity check matrix for $\codeZ$ as well as the generator for $\codeX$.
+	\item Let $\NStablizer$ be the number of stabilizers. Let us also only consider the case where $\NStablizer$ is the number of generators.
+		This results from when $H_Z$ and $H_X$ have the same number of rows.
+	\item Let $\NBits$ be the number of bits.
+	\item Assume $\matrixGenerator$ is the adjacency matrix of a $\leftExpander$ bipartite graph where $A$ is the set of bits
+		and $B$ is the set of stabilizers. Assume the graph is $\RegularBit, \RegularStab$ regular.
+\end{itemize}
+
+For the rest of the paper, we will only consider $Z$ errors. The algorithm and analysis remain the same 
+if considering $X$ errors, but $H_Z$ must be used as the generator matrix and $H_X$ must be used as the parity check matrix.
+
+- Note, 
+- error vec $\bm{e}$, syndrome vec $\bm{\sigma}$,
+- Let there be $M$ stabilizers and consequently $M$ generators
+- Let there be $N$ bits
+- Let $H_X$, $H_Z$
+- The rest of the paper will assume that we are only dealing with generator matric $H_X$, $Z$ errors, parity check matric $H_z$ and syndrome $\sigma_Z$
+- Let the code be formed by $(\delta, \gamma)$ left, bipartite, expander code with regularity where the left is $B$ (for bits) and right is $S$ (for stabilizer). Let it be $\Delta_B, \Delta_S$ regular
+
+\subsection*{Notation}

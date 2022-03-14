@@ -1,208 +1,208 @@
-\newcommand{\bitscorevec}{\boldsymbol{b}}
-\newcommand{\lyingIndividual}{L}
-\newcommand{\lyingGenerator}{E}
-\newcommand{\genscoreRVCorrected}{G}
-\newcommand{\bitscoreRV}{B}
-\newcommand{\syndromeRV}{S}
-\newcommand{\generatorscorevec}{\boldsymbol{g}}
-\newcommand{\generatorscoreRV}{G'}
-\newcommand{\synd}{\boldsymbol{\boldsymbol{\sigma_X}}}
-\newcommand{\DegStable}{{\Delta_{\text{stablizer}}}}
-\newcommand{\DegBit}{{\Delta_{\text{bit}}}}
-\newcommand{\errorvec}{\boldsymbol{\boldsymbol{e}}}
+% \newcommand{\bitscorevec}{\boldsymbol{b}}
+% \newcommand{\lyingIndividual}{L}
+% \newcommand{\lyingGenerator}{E}
+% \newcommand{\genscoreRVCorrected}{G}
+% \newcommand{\bitscoreRV}{B}
+% \newcommand{\syndromeRV}{S}
+% \newcommand{\generatorscorevec}{\boldsymbol{g}}
+% \newcommand{\generatorscoreRV}{G'}
+% \newcommand{\synd}{\boldsymbol{\boldsymbol{\sigma_X}}}
+% \newcommand{\DegStable}{{\Delta_{\text{stablizer}}}}
+% \newcommand{\DegBit}{{\Delta_{\text{bit}}}}
+% \newcommand{\errorvec}{\boldsymbol{\boldsymbol{e}}}
 
-% TODO: say we are working with (a, b) regular graphs. 
-% TODO: say we are working with a $(\gamma, \delta)$ expander code
+% % TODO: say we are working with (a, b) regular graphs. 
+% % TODO: say we are working with a $(\gamma, \delta)$ expander code
 
-The following section assumes that we are working with syndrome $\synd$,
-a generator matrix $H_Z$, and parity check matrix $H_X$.
-The analysis is the same for a syndrome, $\boldsymbol{\sigma_Z}$, generator matrix $H_X$, and
-parity check matrix $H_Z$.
+% The following section assumes that we are working with syndrome $\synd$,
+% a generator matrix $H_Z$, and parity check matrix $H_X$.
+% The analysis is the same for a syndrome, $\boldsymbol{\sigma_Z}$, generator matrix $H_X$, and
+% parity check matrix $H_Z$.
 
-\subsection*{Notation}
-Given a vector $\boldsymbol{v}$, define $v_i$ to be the value of the $i$th row of $\boldsymbol{v}$.
+% \subsection*{Notation}
+% Given a vector $\boldsymbol{v}$, define $v_i$ to be the value of the $i$th row of $\boldsymbol{v}$.
 
-\subsection*{Definitions}
-Let $\DegStable$ equal to the degree of a stabilizer vertex. Note that due to the hypergraph's construction,
-all stabilizers have the same constant degree. 
-Let $\DegBit$ equal to the degree of a qubit vertex. As with the stabilizers, all qubits have the same constant degree.
-Also, for generator $k$, let $\aleph$ be the set of stabilizers neighboring the generator.
-Note that $|\aleph| \leq \DegStable \DegBit$.
+% \subsection*{Definitions}
+% Let $\DegStable$ equal to the degree of a stabilizer vertex. Note that due to the hypergraph's construction,
+% all stabilizers have the same constant degree. 
+% Let $\DegBit$ equal to the degree of a qubit vertex. As with the stabilizers, all qubits have the same constant degree.
+% Also, for generator $k$, let $\aleph$ be the set of stabilizers neighboring the generator.
+% Note that $|\aleph| \leq \DegStable \DegBit$.
 
-Given a syndrome, $\synd$, define a ``bit-score vector", $\bitscorevec = H_X^T \synd$ where
-$\bitscorevec \in \Z^{\NQubits}$. 
-Then, define a ``generator-score vector" as $\generatorscorevec = H_z \bitscorevec $ where
-$\generatorscorevec \in \Z^{\NStables}$. 
-Moreover, assume that for error $e \in \F_2^{\NQubits}$, $\Pr\mleft[e_i = 1\mright] = p$ for all $i \in [\NQubits]$ (i.e.\ 
-the error is modeled as independent). Let $q = 1-p$.
-Let $s_1, s_2, ..., s_{\NStables}$ denote the set of stabilizer vertices.
-Let $N_i = \sum_{j \in \Gamma(s_i)} \errorvec_j$ where $N_i \in \Z$. $N_i$ can be thought of
-as the number of qubits with an error in the neighborhood of stabilizer $i$.
+% Given a syndrome, $\synd$, define a ``bit-score vector", $\bitscorevec = H_X^T \synd$ where
+% $\bitscorevec \in \Z^{\NQubits}$. 
+% Then, define a ``generator-score vector" as $\generatorscorevec = H_z \bitscorevec $ where
+% $\generatorscorevec \in \Z^{\NStables}$. 
+% Moreover, assume that for error $e \in \F_2^{\NQubits}$, $\Pr\mleft[e_i = 1\mright] = p$ for all $i \in [\NQubits]$ (i.e.\ 
+% the error is modeled as independent). Let $q = 1-p$.
+% Let $s_1, s_2, ..., s_{\NStables}$ denote the set of stabilizer vertices.
+% Let $N_i = \sum_{j \in \Gamma(s_i)} \errorvec_j$ where $N_i \in \Z$. $N_i$ can be thought of
+% as the number of qubits with an error in the neighborhood of stabilizer $i$.
 
-Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$. Then we know that
+% Also, let random variable $\syndromeRV_i \in F_2$ correspond  to $\synd_i$. Then we know that
 
-\newcommand{\SPr}{\half - \half\mleft(1-2p\mright)^\DegStable}
-\begin{align*}
-	\Pr[S_i = 1] = \Pr\mleft[\texttt{$N_i$ is odd}\mright] = \SPr.
-\end{align*}
+% \newcommand{\SPr}{\half - \half\mleft(1-2p\mright)^\DegStable}
+% \begin{align*}
+% 	\Pr[S_i = 1] = \Pr\mleft[\texttt{$N_i$ is odd}\mright] = \SPr.
+% \end{align*}
 
-Next, define indicator random variable, $\lyingIndividual_j$ to be $1$ if $\synd_i = 0$ and $N_i > 0$.
-Basically, $\lyingIndividual_j$ indicates whether a stabilizer check succeeds, but an error is in
-its neighborhood. I.e.\ stabilizer $j$ is ``lying."
+% Next, define indicator random variable, $\lyingIndividual_j$ to be $1$ if $\synd_i = 0$ and $N_i > 0$.
+% Basically, $\lyingIndividual_j$ indicates whether a stabilizer check succeeds, but an error is in
+% its neighborhood. I.e.\ stabilizer $j$ is ``lying."
 
-\newcommand{\LyingIndivPr}{\half + \half \mleft( 1 - 2p\mright)^\DegStable - (1-p)^\DegStable}
+% \newcommand{\LyingIndivPr}{\half + \half \mleft( 1 - 2p\mright)^\DegStable - (1-p)^\DegStable}
 
-% TODO: reference pr even (idk via some txtbook)
-So then,
-\begin{align*}
-	\Pr[L_j = 1] &= \Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] \\
-		&= \Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
-		&= \LyingIndivPr.
-\end{align*}
-
-
-Then define random variable, $\lyingGenerator_k$ to be
-$$
-	\lyingGenerator_k = 
-		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k}\;
-				\lyingIndividual_j.
-$$
-
-$\lyingGenerator_k$ is basically the number of time a generator $k$, lies for all
-stabilizers neighboring the generator.
-
-We can then say that
-$$
-	\lyingGenerator_k \sim \texttt{Binom}(\aleph_k, \LyingIndivPr).
-$$
+% % TODO: reference pr even (idk via some txtbook)
+% So then,
+% \begin{align*}
+% 	\Pr[L_j = 1] &= \Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] \\
+% 		&= \Pr[\texttt{$S_i$ is even}] - \Pr[S_i = 0] \\
+% 		&= \LyingIndivPr.
+% \end{align*}
 
 
-
-Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
-correspond to $\generatorscorevec_i$. 
-
-
-So,
-$$
-	\syndromeRV_i \sim \texttt{Bernoulli}\mleft(\SPr\mright).
-$$
-
-% TODO: NEXT STEP: TRELLO / WEEK IN ADVANCE
-Then,
-% TODO: better like neighbourhood thingy
-$$
-	\bitscoreRV_i = \sum_{\texttt{Stabilizer $j$} \; \in \; \Gamma(\texttt{Bit $i$})} \syndromeRV_j
-$$
-So, 
-$$
-	\bitscoreRV_i \sim \texttt{Binom}(\DegBit, \SPr).
-$$
-
-And then,
-$$
-	\generatorscoreRV_k =
-		\sum_{\texttt{Bit $i$} \; \in \; \Gamma(\texttt{generator } k)}\;
-			\sum_{\texttt{Stabilizer } j \; \in \; \Gamma(\texttt{Bit } i)}
-				\syndromeRV_j
-$$
-
-So then,
-$$
-	\generatorscoreRV_k \sim \texttt{Binom}(\DegBit \DegStable, \SPr).
-$$
-
-The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
-gets the $K$ generators, indexed by $g_1, g_2, ..., g_K$, with the top values
-of $\generatorscorevec_i$ for $i \in [\NStables]$. WLOG, assume
-$\generatorscorevec_{g_1} \geq \generatorscorevec_{g_2} \geq ... \geq \generatorscorevec_{g_K}$.
-Then, we can think of $\E[\generatorscoreRV_{\OrderStatDenomi}]$ as the expected value of the $i$th
-top sample from $\NStables$ samples of the distribution defining $\generatorscoreRV_i$.
-
-Let random variable $\genscoreRVCorrected_k$ then equal
-$$
-	\genscoreRVCorrected_k =
-		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k} \syndromeRV_j.
-$$
-
-Note that $|\aleph| \geq (1 - \delta) \DegStable \DegBit$ because we are working with expander codes.
-So then, \begin{align*}
-	\E[\genscoreRVCorrected_k] &= 
-		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k} \E[\syndromeRV_j] \\
-		&\geq (1 - \delta) \DegStable \DegBit \E_{j \in [\NStables]}[\syndromeRV_j]\\
-		&\geq (1 - \delta) \E[\generatorscoreRV_k].
-\end{align*}
-
-% STEPS:
-
-% % Put into lemma
-% So then we can see that $$
-% 	\E[\lyingGenerator_k] = 
-% 		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k}\ \E[L_j] \leq \DegStable \DegBit \E[L_j]
-% 		= \DegStable \DegBit \mleft(\LyingIndivPr\mright).
-% % TODO: negative correlation argument!!!!!
+% Then define random variable, $\lyingGenerator_k$ to be
+% $$
+% 	\lyingGenerator_k = 
+% 		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k}\;
+% 				\lyingIndividual_j.
 % $$
 
-\begin{lemma}{For a generator, given $\lyingGenerator_k$ and $\genscoreRVCorrected$,
-\label{lemma:decrby}
-	we can find some correction vector $\correctionvec \in \F_2^\NQubits$
-	such that \linebreak $\OptNumerator \geq \genscoreRVCorrected_k - \lyingGenerator_k$}
-	and $|k| \leq \frac{1-\delta}{\DegBit} (\genscoreRVCorrected_k + \lyingGenerator_k)$ for $\genscoreRVCorrected > \lyingGenerator_k$.
-	\begin{proof}
-		TODO:	 part 1 is that there are 3 types of stabilizers in neighbourhood.
-		Those from G', those from E, and those in neither. If those in neither, there is no
-		neighbourhood in their error, so you can leave those bits alone. Then, by flipping bits
-		connected to G' you decrease syndrome by G', but you add in at most E'
+% $\lyingGenerator_k$ is basically the number of time a generator $k$, lies for all
+% stabilizers neighboring the generator.
+
+% We can then say that
+% $$
+% 	\lyingGenerator_k \sim \texttt{Binom}(\aleph_k, \LyingIndivPr).
+% $$
+
+
+
+% Then, let random variable $\bitscoreRV_i \in \Z$ correspond to $\bitscorevec_i$ and random variable $\generatorscoreRV_i \in \Z$
+% correspond to $\generatorscorevec_i$. 
+
+
+% So,
+% $$
+% 	\syndromeRV_i \sim \texttt{Bernoulli}\mleft(\SPr\mright).
+% $$
+
+% % TODO: NEXT STEP: TRELLO / WEEK IN ADVANCE
+% Then,
+% % TODO: better like neighbourhood thingy
+% $$
+% 	\bitscoreRV_i = \sum_{\texttt{Stabilizer $j$} \; \in \; \Gamma(\texttt{Bit $i$})} \syndromeRV_j
+% $$
+% So, 
+% $$
+% 	\bitscoreRV_i \sim \texttt{Binom}(\DegBit, \SPr).
+% $$
+
+% And then,
+% $$
+% 	\generatorscoreRV_k =
+% 		\sum_{\texttt{Bit $i$} \; \in \; \Gamma(\texttt{generator } k)}\;
+% 			\sum_{\texttt{Stabilizer } j \; \in \; \Gamma(\texttt{Bit } i)}
+% 				\syndromeRV_j
+% $$
+
+% So then,
+% $$
+% 	\generatorscoreRV_k \sim \texttt{Binom}(\DegBit \DegStable, \SPr).
+% $$
+
+% The pfm algorithm (Algorithm \ref{alg:pfm}) on line \ref{alg:pfm:line:assign}
+% gets the $K$ generators, indexed by $g_1, g_2, ..., g_K$, with the top values
+% of $\generatorscorevec_i$ for $i \in [\NStables]$. WLOG, assume
+% $\generatorscorevec_{g_1} \geq \generatorscorevec_{g_2} \geq ... \geq \generatorscorevec_{g_K}$.
+% Then, we can think of $\E[\generatorscoreRV_{\OrderStatDenomi}]$ as the expected value of the $i$th
+% top sample from $\NStables$ samples of the distribution defining $\generatorscoreRV_i$.
+
+% Let random variable $\genscoreRVCorrected_k$ then equal
+% $$
+% 	\genscoreRVCorrected_k =
+% 		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k} \syndromeRV_j.
+% $$
+
+% Note that $|\aleph| \geq (1 - \delta) \DegStable \DegBit$ because we are working with expander codes.
+% So then, \begin{align*}
+% 	\E[\genscoreRVCorrected_k] &= 
+% 		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k} \E[\syndromeRV_j] \\
+% 		&\geq (1 - \delta) \DegStable \DegBit \E_{j \in [\NStables]}[\syndromeRV_j]\\
+% 		&\geq (1 - \delta) \E[\generatorscoreRV_k].
+% \end{align*}
+
+% % STEPS:
+
+% % % Put into lemma
+% % So then we can see that $$
+% % 	\E[\lyingGenerator_k] = 
+% % 		\sum_{\texttt{Stabilizer $j$} \; \in \; \aleph_k}\ \E[L_j] \leq \DegStable \DegBit \E[L_j]
+% % 		= \DegStable \DegBit \mleft(\LyingIndivPr\mright).
+% % % TODO: negative correlation argument!!!!!
+% % $$
+
+% \begin{lemma}{For a generator, given $\lyingGenerator_k$ and $\genscoreRVCorrected$,
+% \label{lemma:decrby}
+% 	we can find some correction vector $\correctionvec \in \F_2^\NQubits$
+% 	such that \linebreak $\OptNumerator \geq \genscoreRVCorrected_k - \lyingGenerator_k$}
+% 	and $|k| \leq \frac{1-\delta}{\DegBit} (\genscoreRVCorrected_k + \lyingGenerator_k)$ for $\genscoreRVCorrected > \lyingGenerator_k$.
+% 	\begin{proof}
+% 		TODO:	 part 1 is that there are 3 types of stabilizers in neighbourhood.
+% 		Those from G', those from E, and those in neither. If those in neither, there is no
+% 		neighbourhood in their error, so you can leave those bits alone. Then, by flipping bits
+% 		connected to G' you decrease syndrome by G', but you add in at most E'
 		
-		part 2: each flipping bit effects at least (1-delta) $\DegBit$stables
-	\end{proof}
-\end{lemma}
+% 		part 2: each flipping bit effects at least (1-delta) $\DegBit$stables
+% 	\end{proof}
+% \end{lemma}
 
 
-So then for any $\errorvec$ where $|\errorvec| < \min(\gamma_An_A, \gamma_Bn_B)$ by TODO: cite hypergraph prod paper, we know that we can always successfully
-correct errors if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
-$$
-	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
-$$
+% So then for any $\errorvec$ where $|\errorvec| < \min(\gamma_An_A, \gamma_Bn_B)$ by TODO: cite hypergraph prod paper, we know that we can always successfully
+% correct errors if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
+% $$
+% 	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
+% $$
 
-\newcommand{\OptVarRV}{Q}
-\newcommand{\OptVarEqChangeable}[1]{
-\frac
-			{\DegBit \mleft(#1_{\OrderStatDenomi} - \lyingGenerator_{\OrderStatDenomi}\mright)}
-			{(1 - \delta)(#1_{\OrderStatDenomi} + \lyingGenerator_{g_k})}
-}
-\newcommand{\OptVarEq}{\OptVarEqChangeable{\genscoreRVCorrected}}
+% \newcommand{\OptVarRV}{Q}
+% \newcommand{\OptVarEqChangeable}[1]{
+% \frac
+% 			{\DegBit \mleft(#1_{\OrderStatDenomi} - \lyingGenerator_{\OrderStatDenomi}\mright)}
+% 			{(1 - \delta)(#1_{\OrderStatDenomi} + \lyingGenerator_{g_k})}
+% }
+% \newcommand{\OptVarEq}{\OptVarEqChangeable{\genscoreRVCorrected}}
 
-\begin{lemma}{We claim the following holds for an $i \in [K]$ and for $p_S = \Pr[S_j = 1]$ for any stabilizer $j$}
+% \begin{lemma}{We claim the following holds for an $i \in [K]$ and for $p_S = \Pr[S_j = 1]$ for any stabilizer $j$}
 	
-\begin{align*}
-	&\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] \\
-	\leq &\sum_{e = 0}^{\DegBit - 1} 
-			\OrderP\mleft(\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}\mright) \cdot \Pr[E_{\OrderStatDenomi} = e] 
-			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[E_{\OrderStatDenomi} = e]
-\end{align*}
-where
-$$
-	\OrderP(n, p, i, v) = \Pr\mleft[W_i \leq v \mright]
-$$
-and $W_i$ is the $i$th largest order statistic from $M$ samples of $\texttt{Binomial}(n, p)$.
-
-See appendix TODO: cite for details
-\end{lemma}
-
-So then, \begin{align*}
-	\Pr\mleft[\texttt{loop cannot find a correcting error}\mright] &\leq
-		\prod_{i \in [K]} \Pr\mleft[\OptVarEq < \frac{1}{3} \mright]
-\end{align*}
-
-% Hmmmmm.... I think just run simulations on the above ^^ (j draw from G', E...)
-% Let the random variable $Q(K)$ then equal $\OptVarEq$.
-
-% So then, for a given $K$,
+% \begin{align*}
+% 	&\Pr\mleft[\OptVarEq < \frac{1}{3}\mright] \\
+% 	\leq &\sum_{e = 0}^{\DegBit - 1} 
+% 			\OrderP\mleft(\DegBit\DegStable - \DegStable e, p_S, i, \frac{(3\DegBit + 1 - \delta) e}{3\DegBit -1 + \delta}\mright) \cdot \Pr[E_{\OrderStatDenomi} = e] 
+% 			+ \sum_{e = \DegBit}^{\DegBit\DegStable}\Pr[E_{\OrderStatDenomi} = e]
+% \end{align*}
+% where
 % $$
-% 	\Pr\mleft[Q(K) \geq \frac{1}{3}\mright] = 1 - \Pr[Q(K) \leq \frac{1}{3}] \geq 1 - \frac{}{}
+% 	\OrderP(n, p, i, v) = \Pr\mleft[W_i \leq v \mright]
 % $$
+% and $W_i$ is the $i$th largest order statistic from $M$ samples of $\texttt{Binomial}(n, p)$.
 
- lemma \ref{lemma:decrby}, 
+% See appendix TODO: cite for details
+% \end{lemma}
+
+% So then, \begin{align*}
+% 	\Pr\mleft[\texttt{loop cannot find a correcting error}\mright] &\leq
+% 		\prod_{i \in [K]} \Pr\mleft[\OptVarEq < \frac{1}{3} \mright]
+% \end{align*}
+
+% % Hmmmmm.... I think just run simulations on the above ^^ (j draw from G', E...)
+% % Let the random variable $Q(K)$ then equal $\OptVarEq$.
+
+% % So then, for a given $K$,
+% % $$
+% % 	\Pr\mleft[Q(K) \geq \frac{1}{3}\mright] = 1 - \Pr[Q(K) \leq \frac{1}{3}] \geq 1 - \frac{}{}
+% % $$
+
+%  lemma \ref{lemma:decrby}, 
 
 
-% Then, assuming that $p < 0.5$, $\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] < \half$
+% % Then, assuming that $p < 0.5$, $\Pr\mleft[\synd_i = 0\; \middle|\; S_i > 0\mright] < \half$

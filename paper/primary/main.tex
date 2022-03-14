@@ -2,6 +2,7 @@
 
 
 \usepackage{CustomCommands}
+\usepackage{PFM}
 \usepackage{PRIMEarxiv}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
@@ -85,6 +86,10 @@
 \lipsum[2]
 \lipsum[3]
 
+\section{Contribution}
+
+\section{Notation and Definitions}
+\input{section-notation-contribution.tex}
 
 \section{Background}
 \label{sec:background}
@@ -104,6 +109,7 @@
 \lipsum[7]
 
 \section{Algorithm: K-Top Probabilistic Flip Method (K-Top PFM)}
+% TODO: change the notation
 \label{sec:algorithm}
 
 \input{section-algorithm.tex}
@@ -208,9 +214,5 @@ This was was supported in part by......
 \bibliography{references}  
 \newpage
 
-\appendix
-
-\section{Proof of Lemma 4.1}
-\input{lemmalongproof.tex}
 
 \end{document}
