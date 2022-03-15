@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.1.19)  15 MAR 2022 12:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.1.19)  15 MAR 2022 12:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -738,7 +738,7 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
 LaTeX Font Info:    Trying to load font information for U+bbm on input line 3.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-)) [2] (./section-analysis.tex [3]
+)) [2] (./section-time-bound.tex) (./section-analysis.tex [3]
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 57.
  [4] [5]) [6] (./main.bbl (./main.brf)
 \tf@brf=\write4
@@ -746,25 +746,25 @@ Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input l
 
  [7]) [8] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DEE1A568A49FC9F13F48F438336571D5;2617.
+(rerunfilecheck)             Checksum: B288FB3EF5EB39030C63EE7A973BDAF8;2720.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 12A7FCD8096E67771899C243B511D2B1;111.
+(rerunfilecheck)             Checksum: CFAFE7D16EC2608A98DDFF3EEE99034D;111.
  ) 
 Here is how much of TeX's memory you used:
- 21355 strings out of 478286
- 367555 string characters out of 5846741
- 777314 words of memory out of 5000000
- 38801 multiletter control sequences out of 15000+600000
- 540320 words of font info for 247 fonts, out of 8000000 for 9000
+ 21367 strings out of 478286
+ 367758 string characters out of 5846741
+ 777382 words of memory out of 5000000
+ 38806 multiletter control sequences out of 15000+600000
+ 540450 words of font info for 249 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,20n,105p,1043b,565s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} </home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk>{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (8 pages, 282909 bytes).
+Output written on main.pdf (8 pages, 283139 bytes).
 PDF statistics:
- 308 PDF objects out of 1000 (max. 8388607)
- 259 compressed objects within 3 object streams
- 73 named destinations out of 1000 (max. 500000)
- 71333 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 312 PDF objects out of 1000 (max. 8388607)
+ 263 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 71341 words of extra memory for PDF output out of 74296 (max. 10000000)
 
