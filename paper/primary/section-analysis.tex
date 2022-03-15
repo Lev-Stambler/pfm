@@ -148,6 +148,18 @@ Let us start by defining a slew of random variables
 % Sum of independent bernoulli RV --> binomial rv
 
 \subsection*{Probability of single generator error}
+Denote $(x; n, p)$ to be $\Pr[X = x]$ where $X \sim \binomial(n, p)$. Denote $F(x; n, p)$ $\Pr[X \leq x]$.
+Then for $i \in [K]$, let $\sortIndex$ be the index of the generator with the $i$th largest $\generatorScoreRV$.
+In the language of order statistics, this means that $\generatorScoreOrderStat = \generatorScoreRVSorted$.
+
+So then for any $\vecError$ where $|\vecError| < \min(\gamma_An_A, \gamma_Bn_B)$ by TODO: cite hypergraph prod paper, we know that we can always successfully
+correct errors if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
+$$
+	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
+$$
+
+
+Then for 
 % TODO: HERE IS MY THIRD STEP
 
 \subsection*{Probability of error}
@@ -313,12 +325,6 @@ Let us start by defining a slew of random variables
 % 	\end{proof}
 % \end{lemma}
 
-
-% So then for any $\errorvec$ where $|\errorvec| < \min(\gamma_An_A, \gamma_Bn_B)$ by TODO: cite hypergraph prod paper, we know that we can always successfully
-% correct errors if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
-% $$
-% 	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
-% $$
 
 % \newcommand{\OptVarRV}{Q}
 % \newcommand{\OptVarEqChangeable}[1]{
