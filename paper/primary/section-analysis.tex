@@ -10,6 +10,8 @@
 \newcommand{\generatorStabNeighbors}{{\aleph_i}}
 \newcommand{\overcountGenerator}{\mathcal{O}^G_i}
 \newcommand{\overcountError}{\mathcal{O}^E_i}
+\newcommand{\PrS}{\half - \half\mleft(1-2p\mright)^\DegStab}
+\newcommand{\PrL}{\half + \half \mleft( 1 - 2p\mright)^\DegStab - (1-p)^\DegStab}
 
 \subsection*{Definitions}
 Let us start by defining a slew of random variables
@@ -67,30 +69,77 @@ Let us start by defining a slew of random variables
 	\end{proof}
 \end{lemma}
 
+\begin{lemma}{As $\NStablizer, \NBits \rightarrow \infty$ and for stabilizers $j_1, j_2, ..., j_C$ where $C$ is less than some constant,
+		then $\Gamma(j_1), \Gamma(j_2), ..., \Gamma(j_C)$ are independent.
+	}
+	\label{lemma:indep-neighbor}
+	\begin{proof}
+		Let $A \subsetneq [C]$ and $B_{A_1}, B_{A_2}, ..., B_{A_{|A|}} \subseteq [N]$ such that $|B_{A_i}| = \DegStab$.	
+		Then, to show independence, we want to show that for all $j \in C \setminus A$
+		and some set $B_j \subseteq [N], |B_j| = \DegStab$,
+		$$
+			\Pr\mleft[\Gamma(j) = B_j\mright] = \Pr\mleft[\Gamma(j = B_j) \mid \Gamma(A_1) = B_{A_1}, ..., \Gamma(A_{|A|}) = B_{A_{|A|}})\mright].
+		$$
+		The above can easily be seen as $N, M \rightarrow \infty$ as
+		$$
+			\Pr_{B_j \subseteq [N], |B_j| = \DegStab}[\Gamma(j) = B_j] = \DegStab! \prod_{i =1}^{|B_j|} \Pr\mleft[{B_j}_i \in \Gamma(j) \mid {B_j}_{i-1}, ..., {B_j}_{1} \in \Gamma(j)\mright] = \DegStab! \cdot \frac{\DegStab!}{N^\DegStab}.
+		$$
+
+		Then, let $f(k, B_j, A)$ equal to the total number of instances some $k \in B_j$ is 
+		in $B_{A_i}$ for all $i \in |A|$. Note that
+		$$
+			\Pr_{B_j \subseteq [N], |B_j| = \DegStab}[f(k, B_j, A) > 0] \rightarrow 0
+		$$ as $N \rightarrow \infty$.
+		Then, 
+		\begin{align*}
+			&\Pr_{B_j \subseteq [N], |B_j| = \DegStab}\mleft[\Gamma(j = B_j) \mid \Gamma(A_1) = B_{A_1}, ..., \Gamma(A_{|A|}) = B_{A_{|A|}})\mright] \\
+				= &\DegStab! \prod_{i =1}^{|B_j|} \Pr\mleft[{B_j}_i \in \Gamma(j) \mid {B_j}_{i-1}, ..., {B_j}_{1} \in \Gamma(j), \Gamma(A_1) = B_{A_1}, ..., \Gamma(A_{|A|}) = B_{A_{|A|}})\mright]\\
+				= &\DegStab! \prod_{i =1}^{|B_j|} \frac{(\DegStab + 1 - i) \mleft(\DegBit - f({B_j}_i, B_j, A)\mright)}{\DegBit N} \\
+				\text{as } N \rightarrow \infty,\; &\DegStab! \cdot \frac{\DegStab!}{N^\DegStab}.
+		\end{align*}
+	\end{proof}
+\end{lemma}
+
 %% Lemma for S_j
 \begin{lemma}{
-	Assuming that the error rate is independent and
-	the distribution of $\Gamma(j)$ is i.i.d for all stabilizers $j$,
-	$S_1, S_2, ..., S_M$ are independent and
+	Assuming that the error rate is independent, then
+	$S_1, S_2, ..., S_C$ are independent where $C \leq \DegStab \DegBit$ and
 	$$
-		\Pr[S_j = 1] = .
+		\Pr[S_j = 1] = \PrS
 	$$
 }
+\label{lemma:Sj}
 \begin{proof}
+	The $\Pr[S_j = 1]$ is then just equal to the probability that 
+	$$
+		\Pr\mleft[|\set{\vecError_k = 1 : k \in \Gamma(j)}| \texttt{ is odd}\mright].
+	$$
+	Note we are assuming by lemma \ref{lemma:indep-neighbor} that for $j \in [C]$, all the $\Gamma(j)$
+	are independent. Thus, we have that 
+	$
+		\Pr\mleft[|\set{\vecError_k = 1 : k \in \Gamma(j)}| \texttt{ is odd}\mright]
+	$ equals to the probability that a sample from $\binomial(\DegStab, p)$ is odd.
+	This is then equal to $\PrS$. Note also that we can assume $S_1, S_2, ..., S_C$
+	to be independent by lemma $\ref{lemma:indep-neighbor}$.
 	
 \end{proof}
 \end{lemma}
 
 \begin{lemma}{
-	Assuming that the error rate is independent and
-	the distribution of $\Gamma(j)$ is i.i.d for all stabilizers $j$,
-	$L_1, L_2, ..., L_M$ are independent and
+	Assuming that the error rate is independent,
+	$L_1, L_2, ..., L_C$ are independent for $C \leq \DegStab \DegBit$ and
 	$$
-		\Pr[L_j = 1] = .
+		\Pr[L_j = 1] = \PrL.
 	$$
 }
 \begin{proof}
-	
+	Let $s = |\set{\vecError_k = 1 : k \in \Gamma(j)}|$.
+	Note that $L_j$ is $1$ iff $s > 0$ and $s$ is even.
+	Then,
+	$$
+		\Pr[s > 0, s \text{ is even}] = \Pr[s\text{ is even}] - \Pr[s = 0] = \PrL.
+	$$
+	We can also take that $L_1, ..., L_C$ are independent by lemma $\ref{lemma:indep-neighbor}$.
 \end{proof}
 \end{lemma}
 

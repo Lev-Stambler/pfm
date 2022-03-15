@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1647287360 "main.aux" "main.bbl" "main" 1647287506
+["bibtex main"] 1647361579 "main.aux" "main.bbl" "main" 1647361633
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1647287506 6458 a487fa152bd16421d3ae06c2f0ab69a2 "pdflatex"
+  "main.aux" 1647361633 6872 3f5c20c52691571f9510e4520992c00a "pdflatex"
   "references.bib" 1646405059 917 dfc437031a233691152b0896409e2867 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1647287505 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1647287506
+["pdflatex"] 1647361632 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1647361633
   "/home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1646406364 6964 d538b4c5c37c562ac2f35852f5d4dbbf ""
   "/home/lev/code/research/pfm/paper/primary/main.tex" 1647282365 4915 256cf38540d7b905685d1d6d0bfec36a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -79,9 +79,11 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1248133631 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb" 1248133631 39386 0bb525d495ceab21fe797301a586e0d7 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb" 1215737283 175641 e30a691dc1402b08fd6535cf8a31e5b7 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb" 1215737283 169201 9ebf99020dde51a5086e186761a34e8f ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb" 1229303445 16077 4737ac34f0fb5608550f3780a0202c22 ""
@@ -223,14 +225,14 @@
   "CustomCommands.sty" 1647282725 7731 59a9f7e2bd5cfae24715a8f3d20c4ebc ""
   "PFM.sty" 1647287055 749 605d3ba3a39bbe766d6888134b5aa406 ""
   "PRIMEarxiv.sty" 1646406960 7735 534e50c649b95e8b8e697fb445f66f35 ""
-  "main.aux" 1647287506 6458 a487fa152bd16421d3ae06c2f0ab69a2 "pdflatex"
-  "main.bbl" 1647287361 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
-  "main.brf" 1647287506 111 4dcf3c8a3e3318b294faaebbdb84890a "pdflatex"
-  "main.out" 1647287506 2617 dee1a568a49fc9f13f48f438336571d5 "pdflatex"
+  "main.aux" 1647361633 6872 3f5c20c52691571f9510e4520992c00a "pdflatex"
+  "main.bbl" 1647361580 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
+  "main.brf" 1647361633 111 12a7fcd8096e67771899c243b511d2b1 "pdflatex"
+  "main.out" 1647361633 2617 dee1a568a49fc9f13f48f438336571d5 "pdflatex"
   "main.tex" 1647282365 4915 256cf38540d7b905685d1d6d0bfec36a ""
   "section-algorithm.tex" 1646859430 2008 f6da425044666cc67977d4c7d415c312 ""
-  "section-analysis.tex" 1647287505 12584 d1228ee4b15ea8eb1b20fa5600595bfb ""
-  "section-notation-contribution.tex" 1647286945 1818 4b594403345c0c306afe850844007669 ""
+  "section-analysis.tex" 1647361631 15369 ef8473c9cccc36de0758cb89e5cb17c0 ""
+  "section-notation-contribution.tex" 1647359341 1822 2ed6b8940a4c09be7fd6f0bbf4c7dbeb ""
   (generated)
   "main.aux"
   "main.brf"
