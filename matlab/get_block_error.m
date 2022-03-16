@@ -16,12 +16,12 @@ function simulate_n_rounds(file_save_block_err, p, n, cutoff, n_qubits, Hx, Hz, 
    error = get_random_error(p, n_qubits);
    numb_successes_k_top = numb_successes_k_top + simulate_round_filter(error, cutoff, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection);
    numb_successes_all = numb_successes_all + simulate_round_filter(error, -1, n_qubits, Hx, Hz, n_stabilizers, H_transpose_z_projection);
+   fprintf("\n Block error rate: %d\n", block_error_rate);
+   fileID = fopen(file_save_block_err, 'w');
+   fwrite(fileID, "N complete trial: " + string(r) + "K Top Successes: " + string(numb_successes_k_top) + "All Generator Successes: " + string(numb_successes_all));
+   fclose(fileID);
  end
  block_error_rate = 1 - numb_successes_k_top / n;
- fprintf("\n Block error rate: %d\n", block_error_rate);
- fileID = fopen(file_save_block_err, 'w');
- fwrite(fileID, "N: " + string(n_trials) + "K Top Successes: " + string(numb_successes_k_top) + "All Generator Successes: " + string(numb_successes_all));
- fclose(fileID);
 end
 
 % Currently only runs one loop iteration of the small set flip error

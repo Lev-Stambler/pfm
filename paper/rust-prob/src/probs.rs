@@ -4,11 +4,11 @@ use crate::U;
 type BinomParams = (U, f64);
 
 pub struct Construction {
-    N: U,
-    M: U,
-    deg_stab: U,
-    deg_bit: U,
-    p: f64,
+    pub n: U,
+    pub m: U,
+    pub deg_stab: U,
+    pub deg_bit: U,
+    pub p: f64,
 }
 
 impl Construction {

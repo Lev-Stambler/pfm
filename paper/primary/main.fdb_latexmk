@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1647371960 "main.aux" "main.bbl" "main" 1647371962
+["bibtex main"] 1647372992 "main.aux" "main.bbl" "main" 1647372994
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1647371962 7107 032fb7ec5220f09b7e14d60ad5d18e69 "pdflatex"
+  "main.aux" 1647372994 7107 e6002a87cf03a573ac207c04790ba4b9 "pdflatex"
   "references.bib" 1646405059 917 dfc437031a233691152b0896409e2867 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1647371960 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1647371962
+["pdflatex"] 1647372993 "/home/lev/code/research/pfm/paper/primary/main.tex" "main.pdf" "main" 1647372994
   "/home/lev/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1646406364 6964 d538b4c5c37c562ac2f35852f5d4dbbf ""
   "/home/lev/code/research/pfm/paper/primary/main.tex" 1647361856 4993 c6a2ab98f2ed35817913087564d9e17f ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -225,13 +225,13 @@
   "CustomCommands.sty" 1647282725 7731 59a9f7e2bd5cfae24715a8f3d20c4ebc ""
   "PFM.sty" 1647287055 749 605d3ba3a39bbe766d6888134b5aa406 ""
   "PRIMEarxiv.sty" 1646406960 7735 534e50c649b95e8b8e697fb445f66f35 ""
-  "main.aux" 1647371962 7107 032fb7ec5220f09b7e14d60ad5d18e69 "pdflatex"
-  "main.bbl" 1647371960 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
-  "main.brf" 1647371962 111 cfafe7d16ec2608a98ddff3eee99034d "pdflatex"
-  "main.out" 1647371962 2720 b288fb3ef5eb39030c63ee7a973bdaf8 "pdflatex"
+  "main.aux" 1647372994 7107 e6002a87cf03a573ac207c04790ba4b9 "pdflatex"
+  "main.bbl" 1647372993 853 b16b982f3adbf432456e278b34d79b25 "bibtex main"
+  "main.brf" 1647372994 111 cfafe7d16ec2608a98ddff3eee99034d "pdflatex"
+  "main.out" 1647372994 2720 b288fb3ef5eb39030c63ee7a973bdaf8 "pdflatex"
   "main.tex" 1647361856 4993 c6a2ab98f2ed35817913087564d9e17f ""
   "section-algorithm.tex" 1646859430 2008 f6da425044666cc67977d4c7d415c312 ""
-  "section-analysis.tex" 1647371958 15840 4028e6284fe355fec27546458a8952f6 ""
+  "section-analysis.tex" 1647372990 16340 a6956080d2e2e78f5a4a665b48b1c270 ""
   "section-notation-contribution.tex" 1647359341 1822 2ed6b8940a4c09be7fd6f0bbf4c7dbeb ""
   "section-time-bound.tex" 1647361855 148 1dd2fe235b8f877ded35e1fac5cb85be ""
   (generated)

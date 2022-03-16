@@ -60,6 +60,11 @@ Let us start by defining a slew of random variables
 	and $|k| \leq \frac{1-\delta}{\DegBit} (\generatorFlaggedStab + \lyingGenerator)$ for $\generatorFlaggedStab > \lyingGenerator$.
 \label{lemma:decrby}
 	\begin{proof}
+		Let $B$ be a subset of bits in generator $i$ such that flipping all the bits in $i$ flips all
+		$j \in \generatorStabNeighbors$ and $\syndromeRV = 1$ to a 0. Then, notice that for all $j' \in \Gamma(B)$ where $S_{j'} \neq 1$,
+
+		. Then, if flipping $k$ 
+
 		TODO:	 part 1 is that there are 3 types of stabilizers in neighbourhood.
 		Those from G', those from E, and those in neither. If those in neither, there is no
 		neighbourhood in their error, so you can leave those bits alone. Then, by flipping bits
@@ -153,13 +158,16 @@ Then for $i \in [K]$, let $\sortIndex$ be the index of the generator with the $i
 In the language of order statistics, this means that $\generatorScoreOrderStat = \generatorScoreRVSorted$.
 
 So then for any $\vecError$ where $|\vecError| < \min(\gamma_An_A, \gamma_Bn_B)$ by TODO: cite hypergraph prod paper, we know that we can always successfully
-correct errors if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
+decrease the reduced error weight if we can find a $\correctionvec$ such that $\correctionvec$ is a subset of a generator and
 $$
 	\frac{\OptNumerator}{\OptDenominator}	\geq \frac{1}{3}.
 $$
 
 
-Then for 
+Then due to lemma \ref{lemma:decrby}, we know that we can find a $\correctionvec$ satisfying the above inequality if,
+$$
+	\frac{\DegBit \generatorFlaggedStab - \lyingGenerator}{(1 - \delta) \generatorFlaggedStab + \lyingGenerator}
+$$
 % TODO: HERE IS MY THIRD STEP
 
 \subsection*{Probability of error}

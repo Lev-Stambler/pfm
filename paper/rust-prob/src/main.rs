@@ -1,6 +1,6 @@
 mod utils;
 mod probs;
-pub type U = u128;
+pub type U = usize;
 
 fn main() {
     println!("Hello, world!");
