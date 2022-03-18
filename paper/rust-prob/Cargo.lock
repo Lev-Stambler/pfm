@@ -40,6 +40,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "factorial"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6398219c33c5768705156b8a69c99c463a51847e2d3647f5adce32bb6e990b1c"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
 name = "fn-memo"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -334,6 +343,7 @@ checksum = "41cc0f7e4d5d4544e8861606a285bb08d3e70712ccc7d2b84d7c0ccfaf4b05ce"
 name = "rust-prob"
 version = "0.1.0"
 dependencies = [
+ "factorial",
  "fn-memo",
  "memoize",
  "num",
