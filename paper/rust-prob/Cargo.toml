@@ -8,5 +8,5 @@ edition = "2021"
 [dependencies]
 fn-memo = "1.2.0"
 memoize = "0.2.1"
-num-integer = "0.1.44"
+num = "0.4.0"
 probability = "0.18.0"
